@@ -1,8 +1,9 @@
 package group5.viope2014;
 public class Dot extends MazeElement
 {
-	private static int dotsNumber=10;
-	private int remainingDots=dotsNumber;
+	private static int dotsPoint=10;
 	public Dot()
 	{}
+    public int getPoints()
+    { return dotsPoint; }
 }
