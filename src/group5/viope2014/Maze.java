@@ -15,14 +15,6 @@ public class Maze {
         this.filename = filename;
     }
 
-    public String getFilename() {
-        return this.filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
-    
     void setMazeElement(int y, int x, MazeElement element) {
         this.maze[y][x] = element;
     }

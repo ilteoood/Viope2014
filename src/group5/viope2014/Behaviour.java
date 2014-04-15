@@ -5,10 +5,10 @@ package group5.viope2014;
  */
 public abstract class Behaviour {
 
-    // Fields
+    /*Fields*/
     private int oldx,oldy;
 
-    //Methods
+    /*Methods*/
     abstract public int getNewX();
     abstract public int getNewY();
 
