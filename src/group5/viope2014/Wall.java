@@ -14,11 +14,11 @@ public class Wall extends MazeElement
         return "W";
     }
 
-    /*Placeholders*/
-    public int getHorizontalOffset() {
+
+    @Override public int getHorizontalOffset() {
         return 0;
     }
-    public int getVerticalOffset() {
+    @Override public int getVerticalOffset() {
         return 0;
     }
 }
