@@ -1,9 +1,8 @@
 package group5.viope2014;
 public class Wall extends MazeElement
 {
-	public Wall(int x, int y) {
-        super.x = x;
-        super.y = y;
+	public Wall() {
+
     }
 
     /* Overridden to disable movement of the Wall MazeElement. */
