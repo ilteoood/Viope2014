@@ -22,7 +22,7 @@ public abstract class MazeElement
 
     public int getValue() throws UnsupportedOperationException
     {
-        throw new UnsupportedOperationException("The current element hasn't a score!\nOverride before use!");
+        throw new UnsupportedOperationException("The current element doesn't have a score!\nOverride before use!");
     }
 
     //not needed, but can me useful
