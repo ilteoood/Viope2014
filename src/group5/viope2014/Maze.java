@@ -15,6 +15,14 @@ public class Maze {
         this.filename = filename;
     }
 
+    public String getFilename() {
+        return this.filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     void setMazeElement(int y, int x, MazeElement element) {
         this.maze[y][x] = element;
     }
@@ -136,6 +144,7 @@ public class Maze {
             this.powerPillTurns = Integer.parseInt(vars[2]);
             this.score = Integer.parseInt(vars[3]);
             this.lives = Integer.parseInt(vars[4]);
+            this.maze = new MazeElement[this.columns][this.rows];
             setMaze(vars[5]);
         } catch (NumberFormatException e) {
             e.printStackTrace();
