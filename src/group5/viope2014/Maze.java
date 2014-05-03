@@ -66,13 +66,13 @@ public class Maze {
                         switch (currentElement) {                                   // placeholder cases for once the actual MazeElement and Behaviour classes work as intended
                             case 'X' : setMazeElement(y, (x+i), new PacMan());
                                 break;
-                            case 'r' : setMazeElement(y, (x+i), new Enemy(new BlinkyBehaviour());
+                            case 'r' : setMazeElement(y, (x+i), new Enemy('r', new BlinkyBehaviour());
                                 break;
-                            case 'p' : setMazeElement(y, (x+i), new Enemy(new PinkyBehaviour());
+                            case 'p' : setMazeElement(y, (x+i), new Enemy('p', new PinkyBehaviour());
                                 break;
-                            case 'c' : setMazeElement(y, (x+i), new Enemy(new InkyBehaviour());
+                            case 'c' : setMazeElement(y, (x+i), new Enemy('c', new InkyBehaviour());
                                 break;
-                            case 'o' : setMazeElement(y, (x+i), new Enemy(new ClydeBehaviour());
+                            case 'o' : setMazeElement(y, (x+i), new Enemy('o', new ClydeBehaviour());
                                 break;
                             case 'P' : setMazeElement(y, (x+i), new Pill());
                                 break;

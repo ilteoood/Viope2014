@@ -3,4 +3,5 @@ public abstract class MobileElement extends MazeElement
 {
 	// Fields
 	protected Behaviour bev;
+
 }
