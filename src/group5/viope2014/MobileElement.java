@@ -5,4 +5,6 @@ public abstract class MobileElement extends MazeElement
 	protected Behaviour bev;
     protected char name;
 
+
+
 }

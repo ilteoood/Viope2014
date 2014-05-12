@@ -6,12 +6,17 @@ package group5.viope2014;
 public abstract class Behaviour {
 
     /*Fields*/
-    private int x = MazeElement.getX();
-    private int y = MazeElement.getY();
+    private static int oldX, oldY;
+    //private int x = MazeElement.getX();
+    ///private int y = MazeElement.getY();
     public boolean isAlive = true;
     public boolean gameOngoing = true;
 
-    switch () {
+
+
+
+    /*
+    switch() {
         case direction = left;
             MazeElement.move(x-1, y)
             x = x-1;
@@ -29,13 +34,26 @@ public abstract class Behaviour {
             x = x;
             y = y+1;
     }
+    */
 
     /*Methods*/
-    abstract public int getX();
-    abstract public int getY();
+    abstract public int getNewX();
 
-    public void moveAhead() { };
-    public void turnLeft() { };
-    public void turnRight() { };
+    abstract public int getNewY();
+
+    public void moveAhead() {
+    }
+
+    ;
+
+    public void turnLeft() {
+    }
+
+    ;
+
+    public void turnRight() {
+    }
+
+    ;
 
 }

@@ -166,6 +166,79 @@ public class Maze {
 
     //Not touching this
     public void move() {
+        MazeElement tmpNewBlinky = new Empty(), tmpOldBlinky = new Dot();
+        MazeElement tmpNewPinky = new Empty(), tmpOldPinky = new Dot();
+        MazeElement tmpNewInky = new Empty(), tmpOldInky = new Dot();
+        MazeElement tmpNewClyde = new Empty(), tmpOldClyde = new Dot();
+        int newX = 0, newY = 0;
+        for (int i = 0; i<this.columns;i++) {
+            for (int j = 0; j<this.rows; j++) {
 
-    }
+
+                if (this.maze[i][j] instanceof Enemy.Blinky) {
+                    newY = this.maze[i][j].getNewY();
+                    newX = this.maze[i][j].getNewx();
+                    tmpNewBlinky = getMazeElement(newY,newX);
+                    if (tmpNewBlinky instanceof PacMan) {
+
+                        this.lives--;
+                        this.maze[i][j] = new Empty();
+                    }
+                    else {
+                        setMazeElement(i, j, tmpOldBlinky);
+                        //this.maze[i][j] = tmpOldBlinky;
+                        tmpOldBlinky = tmpNewBlinky;
+                        setMazeElement(newY, newX, new Enemy.Blinky('r', new BlinkyBehaviour());
+                    }
+                }
+                else if (this.maze[i][j] instanceof Enemy.Pinky) {
+                    newY = this.maze[i][j].getNewY();
+                    newX = this.maze[i][j].getNewx();
+                    tmpNewPinky = getMazeElement(newY,newX);
+                    if (tmpNewPinky instanceof PacMan) {
+                        this.lives--;
+                        this.maze[i][j] = new Empty();
+                    }
+                    else {
+                        setMazeElement(i, j, tmpOldPinky);
+                        //this.maze[i][j] = tmpOldPinky;
+                        tmpOldPinky = tmpNewPinky;
+                        setMazeElement(newY, newX, new Enemy.Pinky('p', new PinkyBehaviour());
+                    }
+                }
+                else if (this.maze[i][j] instanceof Enemy.Inky) {
+                    newY = this.maze[i][j].getNewY();
+                    newX = this.maze[i][j].getNewx();
+                    tmpNewInky = getMazeElement(newY,newX);
+                    if (tmpNewInky instanceof PacMan) {
+                        this.lives--;
+                        this.maze[i][j] = new Empty();
+                    }
+                    else {
+                        setMazeElement(i, j, tmpOldInky);
+                        //this.maze[i][j] = tmpOldInky;
+                        tmpOldInky = tmpNewInky;
+                        setMazeElement(newY, newX, new Enemy.Inky('c', new InkyBehaviour());
+                    }
+                }
+                else if (this.maze[i][j] instanceof Enemy.Clyde) {
+                    newY = this.maze[i][j].getNewY();
+                    newX = this.maze[i][j].getNewx();
+                    tmpNewClyde = getMazeElement(newY, newX);
+                    if (tmpNewClyde instanceof PacMan) {
+                        this.lives--;
+                        this.maze[i][j] = new Empty();
+                        setMazeElement(i, j, new Empty());
+                    }
+                    else {
+                        setMazeElement(i, j, tmpOldClyde);
+                        //this.maze[i][j] = tmpOldClyde;
+                        tmpOldClyde = tmpNewClyde;
+                        setMazeElement(newY, newX, new Enemy.Clyde('o', new ClydeBehaviour());
+                    }
+                }
+                else {
+
+
+                }
 }
