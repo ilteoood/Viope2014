@@ -31,6 +31,10 @@ public class Maze {
         return this.maze[y][x];
     }
 
+    public int getLives() {
+        return this.lives;
+    }
+
      @Override public String toString() {
         String currentConfig = "";
         String currentElement = "W";    //Assuming every maze starts with a wall in the 0,0 position.
@@ -89,6 +93,7 @@ public class Maze {
                             case 'W' : setMazeElement(y, (x+i), new Wall());
                                 break;
                             case '_' : setMazeElement(y, (x+i), new Empty());
+                                break;
                         }
                     }
                     x+=counter;                                                     //shift x's position.
@@ -176,21 +181,30 @@ public class Maze {
 
 
                 if (this.maze[i][j] instanceof Enemy.Blinky) {
-                    newY = this.maze[i][j].getNewY();
-                    newX = this.maze[i][j].getNewx();
+                    newY = this.maze[i][j].bev.getNewY();
+                    newX = this.maze[i][j].bev.getNewX();
                     tmpNewBlinky = getMazeElement(newY,newX);
                     if (tmpNewBlinky instanceof PacMan) {
 
                         this.lives--;
-                        this.maze[i][j] = new Empty();
+                        setMazeElement(i, j, new Empty(j, i));
                     }
                     else {
                         setMazeElement(i, j, tmpOldBlinky);
                         //this.maze[i][j] = tmpOldBlinky;
                         tmpOldBlinky = tmpNewBlinky;
-                        setMazeElement(newY, newX, new Enemy.Blinky('r', new BlinkyBehaviour());
+                        setMazeElement(newY, newX, new Enemy().new Blinky(newX, newY, new BlinkyBehaviour(), 'r'));
                     }
                 }
+
+
+
+
+
+
+
+
+
                 else if (this.maze[i][j] instanceof Enemy.Pinky) {
                     newY = this.maze[i][j].getNewY();
                     newX = this.maze[i][j].getNewx();
@@ -203,7 +217,7 @@ public class Maze {
                         setMazeElement(i, j, tmpOldPinky);
                         //this.maze[i][j] = tmpOldPinky;
                         tmpOldPinky = tmpNewPinky;
-                        setMazeElement(newY, newX, new Enemy.Pinky('p', new PinkyBehaviour());
+                        setMazeElement(newY, newX, new Enemy.Pinky('p', new PinkyBehaviour()));
                     }
                 }
                 else if (this.maze[i][j] instanceof Enemy.Inky) {
@@ -241,4 +255,148 @@ public class Maze {
 
 
                 }
+            }
+        }
+    }
+    boolean newCoords(MobileElement mob) {
+        switch (mob.bev.getBehaviour())
+        {
+            case 'l':
+                //DO NOT TOUCH THIS!!!!
+                if (mob.getHorizontalOffset(mob.bev.getOldX()) == 1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {         //facing right
+                    if (getMazeElement(mob.getY(), mob.getX() + 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() + 1) instanceof Enemy) {
+                        mob.bev.setOldX(mob.getX() - 1);
+                        mob.bev.setOldY(mob.getY());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+
+                }
+                //!!!!!!!!
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == 1 ) {   //facing upward
+                    if (getMazeElement(mob.getY() + 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() + 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY() + 1);
+                        mob.bev.setOldX(mob.getX());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == -1) {   //facing downward
+                    if (getMazeElement(mob.getY() - 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() - 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY() - 1);
+                        mob.bev.setOldX(mob.getX());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == -1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {   //facing left
+                    if (getMazeElement(mob.getY(), mob.getX() - 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() - 1) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY());
+                        mob.bev.setOldX(mob.getX() - 1);
+                        return false;
+                    }
+                    else {
+                        //NEEDS MORE CODE HERE ABOUT NEXT COORDS
+                        return true;
+                    }
+                }
+                break;
+            case 'r':
+                if (mob.getHorizontalOffset(mob.bev.getOldX()) == 1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {         //facing right
+                    if (getMazeElement(mob.getY(), mob.getX() + 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() + 1) instanceof Enemy) {
+                        mob.bev.setOldX(mob.getX());    //Facing downward
+                        mob.bev.setOldY(mob.getY() + 1);
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == 1 ) {   //facing upward
+                    if (getMazeElement(mob.getY() + 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() + 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY()); //Facing right
+                        mob.bev.setOldX(mob.getX() - 1);
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == -1) {   //facing downward
+                    if (getMazeElement(mob.getY() - 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() - 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY());    //Facing left
+                        mob.bev.setOldX(mob.getX() + 1);
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == -1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {   //facing left
+                    if (getMazeElement(mob.getY(), mob.getX() - 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() - 1) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY() - 1);    //Facing upward
+                        mob.bev.setOldX(mob.getX());
+                        return false;
+                    }
+                    else {
+                        //NEEDS MORE CODE HERE ABOUT NEXT COORDS behaviour.setNewX
+                        return true;
+                    }
+                }
+                break;
+            case 'b':
+                if (mob.getHorizontalOffset(mob.bev.getOldX()) == 1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {         //facing right
+                    if (getMazeElement(mob.getY(), mob.getX() + 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() + 1) instanceof Enemy) {
+                        mob.bev.setOldX(mob.getX() + 1);    //Facing left
+                        mob.bev.setOldY(mob.getY());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == 1 ) {   //facing upward
+                    if (getMazeElement(mob.getY() + 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() + 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY() + 1); //Facing downward
+                        mob.bev.setOldX(mob.getX());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == 0 && mob.getVerticalOffset(mob.bev.getOldY()) == -1) {   //facing downward
+                    if (getMazeElement(mob.getY() - 1, mob.getX()) instanceof Wall || getMazeElement(mob.getY() - 1, mob.getX()) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY() - 1);    //Facing upward
+                        mob.bev.setOldX(mob.getX());
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else if (mob.getHorizontalOffset(mob.bev.getOldX()) == -1 && mob.getVerticalOffset(mob.bev.getOldY()) == 0) {   //facing left
+                    if (getMazeElement(mob.getY(), mob.getX() - 1) instanceof Wall || getMazeElement(mob.getY(), mob.getX() - 1) instanceof Enemy) {
+                        mob.bev.setOldY(mob.getY());    //Facing right
+                        mob.bev.setOldX(mob.getX() - 1);
+                        return false;
+                    }
+                    else {
+                        //NEEDS MORE CODE HERE ABOUT NEXT COORDS behaviour.setNewX
+                        return true;
+                    }
+                }
+                break;
+            default:
+                System.out.println("Something went wrong");
+                return false;
+                break;
+        }
+    }
 }

@@ -10,6 +10,6 @@ public class Empty extends MazeElement
     @Override public String toString() {return " ";}
 
     /* Return the offset =0 because the element can't be moved */
-    public int getHorizontalOffset() {return 0;}
-    public int getVerticalOffset() {return 0; }
+    public int getHorizontalOffset(int x) {return 0;}
+    public int getVerticalOffset(int y) {return 0; }
 }

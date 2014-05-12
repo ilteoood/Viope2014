@@ -43,6 +43,13 @@ public class Enemy extends MobileElement {
             this.name = name;
         }
     }
+
+    public int getHorizontalOffset() {
+        return 0;       //PLACEHOLDER
+    }
+    public int getVerticalOffset() {
+        return 0;       //PLACEHOLDER
+    }
 }
 
 /*

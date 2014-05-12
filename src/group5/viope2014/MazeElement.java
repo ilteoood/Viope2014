@@ -17,8 +17,12 @@ public abstract class MazeElement
         return "Position: ("+this.x+","+this.y+")";
     }
 
-	public abstract int getHorizontalOffset();
-	public abstract int getVerticalOffset();
+	public int getHorizontalOffset(int x) {
+        return this.x - x;                      //Positive value if the object is moving to the right.
+    };
+	public int getVerticalOffset(int y) {
+        return this.y - y;                       //Positive value if the object is moving upward.
+    };
 
     public int getValue() throws UnsupportedOperationException
     {

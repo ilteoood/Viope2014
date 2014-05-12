@@ -13,11 +13,28 @@ public abstract class Behaviour {
     public boolean isAlive = true;
     public boolean gameOngoing = true;
 
-    public Behaviour(MazeElement mazeEl)
+    public Behaviour()
     {
-        this.mazeE=mazeEl;
-        this.x=mazeEl.getX();
-        this.y=mazeEl.getY();
+        //this.mazeE=mazeEl;
+        //this.x=mazeEl.getX();
+        //this.y=mazeEl.getY();
+    }
+    public abstract char getBehaviour();
+
+    public int getOldX() {
+        return this.oldX;
+    }
+
+    public int getOldY() {
+        return this.oldY;
+    }
+
+    public void setOldX(int x) {
+        this.oldX = x;
+    }
+
+    public void setOldY(int y) {
+        this.oldY = y;
     }
     
     public void move(char direction)
