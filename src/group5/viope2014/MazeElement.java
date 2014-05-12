@@ -17,8 +17,8 @@ public abstract class MazeElement
         return "Position: ("+this.x+","+this.y+")";
     }
 
-	//public abstract int getHorizontalOffset();
-	//public abstract int getVerticalOffset();
+	public abstract int getHorizontalOffset();
+	public abstract int getVerticalOffset();
 
     public int getValue() throws UnsupportedOperationException
     {

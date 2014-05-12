@@ -1,59 +1,56 @@
 package group5.viope2014;
-
 /**
  * Created by Anne on 04/04/14.
  */
+/* Reviewed by iLTeoooD & JDL */
 public abstract class Behaviour {
 
     /*Fields*/
-    private static int oldX, oldY;
-    //private int x = MazeElement.getX();
-    ///private int y = MazeElement.getY();
+    private int oldX, oldY;
+    private int x ;
+    private int y ;
+    private MazeElement mazeE;
     public boolean isAlive = true;
     public boolean gameOngoing = true;
 
-
-
-
-    /*
-    switch() {
-        case direction = left;
-            MazeElement.move(x-1, y)
-            x = x-1;
-            y = y;
-        case direction = right;
-            MazeElement.move(x+1, y)
-            x = x+1;
-            y = y;
-        case direction = down;
-            MazeElement.move(x, y-1)
-            x = x;
-            y = y-1;
-        case direction = up;
-            MazeElement.move(x, y+1)
-            x = x;
-            y = y+1;
+    public Behaviour(MazeElement mazeEl)
+    {
+        this.mazeE=mazeEl;
+        this.x=mazeEl.getX();
+        this.y=mazeEl.getY();
     }
-    */
+    
+    public void move(char direction)
+    {
+        switch (direction)
+        {
+            case 'l':
+                this.oldX=x;
+                x--;
+                mazeE.move(x, y);
+                break;
+            case 'r':
+                this.oldX=x;
+                x++;
+                mazeE.move(x, y);
+                break;
+            case 'd':
+                this.oldY=y;
+                y--;
+                mazeE.move(x, y);
+                break;
+            case 'u':
+                this.oldY=y;
+                y++;
+                break;
+            default:
+                System.out.println("Something went wrong");
+        }
+    }
 
     /*Methods*/
     abstract public int getNewX();
 
     abstract public int getNewY();
-
-    public void moveAhead() {
-    }
-
-    ;
-
-    public void turnLeft() {
-    }
-
-    ;
-
-    public void turnRight() {
-    }
-
-    ;
 
 }
