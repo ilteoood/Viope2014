@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class Maze {
 
-    private MazeElement[][] maze;
+  /*  private MazeElement[][] maze;
     private int  rows, columns, score, powerPillTurns, lives;
     private String filename;
 
@@ -35,7 +35,7 @@ public class Maze {
         return this.lives;
     }
 
-    @Override public String toString() {
+     @Override public String toString() {
         String currentConfig = "";
         String currentElement = "W";    //Assuming every maze starts with a wall in the 0,0 position.
         int counter = 1;
@@ -76,23 +76,23 @@ public class Maze {
                     currentElement = startConfig.charAt(i);
                     for (int j = x; j < x+counter;i++) {                            // Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // placeholder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour()));
+                            case 'X' : setMazeElement(y, (x+i), new PacMan('X', new PacManBehaviour());
                                 break;
-                            case 'r' : setMazeElement(y, (x+i), new Blinky(x+i, y, new BlinkyBehaviour()));
+                            case 'r' : setMazeElement(y, (x+i), new Enemy.Blinky('r', new BlinkyBehaviour());
                                 break;
-                            case 'p' : setMazeElement(y, (x+i), new Pinky(x+i, y, new PinkyBehaviour()));
+                            case 'p' : setMazeElement(y, (x+i), new Enemy.Pinky('p', new PinkyBehaviour());
                                 break;
-                            case 'c' : setMazeElement(y, (x+i), new Inky(x+i,y, new InkyBehaviour()));
+                            case 'c' : setMazeElement(y, (x+i), new Enemy.Inky('c', new InkyBehaviour());
                                 break;
-                            case 'o' : setMazeElement(y, (x+i), new Clyde(x+i, y, new ClydeBehaviour()));
+                            case 'o' : setMazeElement(y, (x+i), new Enemy.Clyde('o', new ClydeBehaviour());
                                 break;
-                            case 'P' : setMazeElement(y, (x+i), new Pill(x+i, y));
+                            case 'P' : setMazeElement(y, (x+i), new Pill());
                                 break;
-                            case 'd' : setMazeElement(y, (x+i), new Dot(x+i, y));
+                            case 'd' : setMazeElement(y, (x+i), new Dot());
                                 break;
-                            case 'W' : setMazeElement(y, (x+i), new Wall(x+i, y));
+                            case 'W' : setMazeElement(y, (x+i), new Wall());
                                 break;
-                            case '_' : setMazeElement(y, (x+i), new Empty(x+i, y));
+                            case '_' : setMazeElement(y, (x+i), new Empty());
                                 break;
                         }
                     }
@@ -232,7 +232,7 @@ public class Maze {
                         setMazeElement(i, j, tmpOldInky);
                         //this.maze[i][j] = tmpOldInky;
                         tmpOldInky = tmpNewInky;
-                        setMazeElement(newY, newX, new Enemy.Inky('c', new InkyBehaviour()));
+                        setMazeElement(newY, newX, new Enemy.Inky('c', new InkyBehaviour());
                     }
                 }
                 else if (this.maze[i][j] instanceof Enemy.Clyde) {
@@ -248,7 +248,7 @@ public class Maze {
                         setMazeElement(i, j, tmpOldClyde);
                         //this.maze[i][j] = tmpOldClyde;
                         tmpOldClyde = tmpNewClyde;
-                        setMazeElement(newY, newX, new Enemy.Clyde('o', new ClydeBehaviour()));
+                        setMazeElement(newY, newX, new Enemy.Clyde('o', new ClydeBehaviour());
                     }
                 }
                 else {
@@ -396,7 +396,7 @@ public class Maze {
             default:
                 System.out.println("Something went wrong");
                 return false;
-            break;
+                break;
         }
     }
 
@@ -416,5 +416,5 @@ public class Maze {
 
         }
 
-    }
+    }*/
 }
