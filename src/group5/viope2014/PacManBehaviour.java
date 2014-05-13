@@ -1,25 +1,23 @@
 package group5.viope2014;
 
-/**
- * Created by Anne on 04/04/14.
- */
 public class PacManBehaviour extends Behaviour
 {
+    public PacManBehaviour(){}
 
-    /*turnRight()
-    do {
-        if (cellAhead == Wall) { turnLeft(); }
-        else { moveAhead(); }
-    } while (isAlive and gameOngoing)
+    @Override
+    public int[] move(int dir)
+    {
+        int[] directionArray=choseDirection.getMovement(dir);
+        return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
+    }
 
-
-    // something like if (x,y) is position of an enemy, add points and make enemy disappear? (here or in PacMan class)
-    */
-    public int getNewX() {
+    public int getNewX()
+    {
         return 0;
     }
 
-    public int getNewY() {
+    public int getNewY()
+    {
         return 0;
     }
 }

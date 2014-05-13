@@ -3,7 +3,7 @@ public abstract class MobileElement extends MazeElement
 {
 	/* Fields */
 	private Behaviour bev;
-
+    public MobileElement(){}
     public MobileElement(Behaviour b)
     {
         this.bev=b;

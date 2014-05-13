@@ -5,13 +5,10 @@ public class PacMan extends MobileElement
     private int life=1;
     private int vulnerableTurns=5;
     private boolean vulnerable=true;
-    private int x;
-    private int y;
     private Behaviour bev;
     public PacMan(int x, int y, Behaviour p)
     {
-        this.x=x;
-        this.y=y;
+        super.move(x,y);
         this.bev = p;
     }
     public void pillEat()
