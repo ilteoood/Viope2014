@@ -1,7 +1,7 @@
 package group5.viope2014;
 public class Dot extends MazeElement
 {
-	private static int dotsPoint=10;
+	private final static int dotsPoint=10;
 
 	public Dot(int x, int y) {super.move(x,y);}
 

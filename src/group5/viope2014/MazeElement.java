@@ -5,7 +5,6 @@ import java.lang.UnsupportedOperationException;
 public abstract class MazeElement
 {
 	private int x,y;
-
 	public void move (int x,int y)
 	{
         this.x=x;
@@ -17,12 +16,14 @@ public abstract class MazeElement
         return "Position: ("+this.x+","+this.y+")";
     }
 
-	public int getHorizontalOffset(int x) {
+	public int getHorizontalOffset(int x)
+    {
         return this.x - x;                      //Positive value if the object is moving to the right.
-    };
-	public int getVerticalOffset(int y) {
+    }
+	public int getVerticalOffset(int y)
+    {
         return this.y - y;                       //Positive value if the object is moving upward.
-    };
+    }
 
     public int getValue() throws UnsupportedOperationException
     {

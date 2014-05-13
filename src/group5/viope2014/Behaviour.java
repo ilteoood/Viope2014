@@ -7,8 +7,8 @@ public abstract class Behaviour {
 
     /*Fields*/
     private int oldX, oldY;
-    private int x ;
-    private int y ;
+    protected int x ;
+    protected int y ;
     private MazeElement mazeE;
     public boolean isAlive = true;
     public boolean gameOngoing = true;
