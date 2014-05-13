@@ -1,6 +1,6 @@
 package group5.viope2014;
 
-public class Blinky extends MobileElement
+public class Blinky extends Enemy
 {
     public Blinky (int x, int y, Behaviour b)
     {

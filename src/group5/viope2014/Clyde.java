@@ -1,5 +1,6 @@
 package group5.viope2014;
-public class Clyde extends MobileElement
+
+public class Clyde extends Enemy
 {
     public Clyde(int x, int y, Behaviour b)
     {
