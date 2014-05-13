@@ -1,17 +1,31 @@
 package group5.viope2014;
 
-/**
- * Created by Anne on 04/04/14.
- */
-public abstract class ClydeBehaviour extends Behaviour
+public class ClydeBehaviour extends Behaviour
 {
+    private int direction = choseDirection.Move_Down;
 
-    turnDown()
-    do
+    @Override
+    public int[] move(int dir)
     {
-        if (cellAhead = Wall or ) { turnLeft(), turnLeft() }
-        else { moveAhead() }
+        int[] directionArray=choseDirection.getMovement(dir);
+        return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
     }
-    while (isAlive and gameOngoing)
 
+    @Override
+    public int getDirection()
+    {
+        return this.direction;
+    }
+
+    @Override
+    public void setDirection(int dir)
+    {
+        this.direction=dir;
+    }
+
+    @Override
+    public int getDefDirection()
+    {
+        return choseDirection.Move_Down;
+    }
 }

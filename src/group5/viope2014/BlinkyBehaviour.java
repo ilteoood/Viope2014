@@ -1,23 +1,31 @@
 package group5.viope2014;
 
-/**
- * Created by Anne on 04/04/14.
- */
-public class BlinkyBehaviour extends Behaviour {
+public class BlinkyBehaviour extends Behaviour
+{
+    private int direction = choseDirection.Move_Left;
 
-/*  turnLeft()
-    do {
-        if (cellAhead == Wall) { turnLeft() }
-        else { moveAhead() }
-    } while (isAlive and gameOngoing)
-*/
-    public char getBehaviour() {
-        return 'l';
+    @Override
+    public int[] move(int dir)
+    {
+        int[] directionArray=choseDirection.getMovement(dir);
+        return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
     }
-    public int getNewX() {
-        return 0;
+
+    @Override
+    public int getDirection()
+    {
+        return this.direction;
     }
-    public int getNewY() {
-        return 0;
+
+    @Override
+    public void setDirection(int dir)
+    {
+        this.direction=dir;
+    }
+
+    @Override
+    public int getDefDirection()
+    {
+        return choseDirection.Move_Left;
     }
 }

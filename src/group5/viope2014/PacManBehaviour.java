@@ -2,7 +2,7 @@ package group5.viope2014;
 
 public class PacManBehaviour extends Behaviour
 {
-    public PacManBehaviour(){}
+    private int direction = choseDirection.Move_Right;
 
     @Override
     public int[] move(int dir)
@@ -11,13 +11,21 @@ public class PacManBehaviour extends Behaviour
         return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
     }
 
-    public int getNewX()
+    @Override
+    public int getDirection()
     {
-        return 0;
+        return this.direction;
     }
 
-    public int getNewY()
+    @Override
+    public void setDirection(int dir)
     {
-        return 0;
+        this.direction=dir;
+    }
+
+    @Override
+    public int getDefDirection()
+    {
+        return choseDirection.Move_Right;
     }
 }

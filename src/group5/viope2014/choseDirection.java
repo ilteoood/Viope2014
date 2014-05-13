@@ -2,13 +2,12 @@ package group5.viope2014;
 
 public class choseDirection
 {
-    /*
-    Legend about the movement, array index:
-    - 0, right
-    - 1, left
-    - 2, up
-    - 3, down
-    */
+    // Direction:
+    public static final int Move_Right=0;
+    public static final int Move_Left=1;
+    public static final int Move_Up=2;
+    public static final int Move_Down=3;
+
     private static final int x[]={1,-1,0,0};
     private static final int y[]={0,0,1,-1};
     public static int[] getMovement(int dir)

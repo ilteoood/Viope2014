@@ -1,14 +1,31 @@
 package group5.viope2014;
 
-/**
- * Created by Anne on 04/04/14.
- */
-public abstract class InkyBehaviour extends Behaviour {
+public class InkyBehaviour extends Behaviour
+{
+    private int direction = choseDirection.Move_Up;
 
-    turnUp()
-    do {
-        if (cellAhead == Wall) { turnLeft(), turnLeft() }
-        else { moveAhead() }
-    } while (isAlive and gameOngoing)
+    @Override
+    public int[] move(int dir)
+    {
+        int[] directionArray=choseDirection.getMovement(dir);
+        return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
+    }
 
+    @Override
+    public int getDirection()
+    {
+        return this.direction;
+    }
+
+    @Override
+    public void setDirection(int dir)
+    {
+        this.direction=dir;
+    }
+
+    @Override
+    public int getDefDirection()
+    {
+        return choseDirection.Move_Up;
+    }
 }
