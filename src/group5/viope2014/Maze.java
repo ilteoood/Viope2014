@@ -399,4 +399,22 @@ public class Maze {
                 break;
         }
     }
+
+    public void printMaze() {
+
+        System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
+
+        for (int i = 0; i < this.columns; i++) {
+
+            for (int j = 0; j < this.rows; j++) {
+
+                System.out.print(this.maze[i][j].toString());
+
+            }
+
+            System.out.println();
+
+        }
+
+    }
 }
