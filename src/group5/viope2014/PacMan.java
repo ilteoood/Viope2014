@@ -2,7 +2,7 @@ package group5.viope2014;
 
 public class PacMan extends MobileElement
 {
-    private boolean isAlive=true;
+    private int lifes=3;
     private int vulnerableTurns=5;
     private boolean vulnerable=true;
         
@@ -31,11 +31,11 @@ public class PacMan extends MobileElement
 
     public void decreaseLife()
     {
-        this.isAlive=(vulnerable==true?false:true);
+        lifes-=(vulnerable==true?1:0);
     }
 
     public boolean isDead()
     {
-        return (this.isAlive==true?false:true);
+        return (lifes==0?true:false);
     }
 }
