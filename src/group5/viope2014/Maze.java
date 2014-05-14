@@ -7,7 +7,7 @@ import java.io.*;
  */
 public class Maze {
 
-  /*  private MazeElement[][] maze;
+	private MazeElement[][] maze;
     private int  rows, columns, score, powerPillTurns, lives;
     private String filename;
 
@@ -171,7 +171,7 @@ public class Maze {
 
     //Not touching this
     public void move() {
-        MazeElement tmpNewBlinky = new Empty(), tmpOldBlinky = new Dot();
+    /*    MazeElement tmpNewBlinky = new Empty(), tmpOldBlinky = new Dot();
         MazeElement tmpNewPinky = new Empty(), tmpOldPinky = new Dot();
         MazeElement tmpNewInky = new Empty(), tmpOldInky = new Dot();
         MazeElement tmpNewClyde = new Empty(), tmpOldClyde = new Dot();
@@ -415,6 +415,17 @@ public class Maze {
             System.out.println();
 
         }
+	*/
+    }
+    
+    public void printMaze() {
+        System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
+        for (int i = 0; i < this.columns; i++) {
+            for (int j = 0; j < this.rows; j++) {
+                System.out.print(this.maze[i][j].toString());
+            }
+            System.out.println();
+        }
+    }
 
-    }*/
 }

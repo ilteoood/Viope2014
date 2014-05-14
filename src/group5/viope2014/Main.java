@@ -43,4 +43,12 @@ public class Main
         catch (IOException e)
         {System.out.println(e.getMessage());}
     }
+    /*
+    public static void main(String[] args) {
+    	Maze field = new Maze("filename.txt");
+    	field.reload();
+    	field.printMaze();
+    	System.exit(0);
+    }
+    */
 }
