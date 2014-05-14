@@ -56,6 +56,14 @@ public class Maze {
         }
         return currentConfig;
     }
+    public boolean isInteger(String str) {
+    	try {
+    		int i = Integer.parseInt(str);
+    		return true;
+    	} catch (NumberFormatException e) {
+    		return false;
+    	}
+    }
 
     public void setMaze(String startConfig) {
         int y = 0, x = 0, counter = 1;
@@ -70,6 +78,37 @@ public class Maze {
                     }
                     continue;
                 }
+                if (isInteger(Character.toString(startConfig.charAt(i)))) {
+                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i)));
+                }
+                else {
+                	currentElement = startConfig.charAt(i);
+                	for (int j = x; j < x+counter;j++) {                            // Might throw IndexOutOfBoundsException
+                        switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
+                            case 'X' : setMazeElement(y, (x+j), new PacMan(x+j, y, new PacManBehaviour(), this.score));
+                                break;
+                            case 'r' : setMazeElement(y, (x+j), new Blinky(x+j, y, new BlinkyBehaviour()));
+                                break;
+                            case 'p' : setMazeElement(y, (x+j), new Pinky(x+j, y, new PinkyBehaviour()));
+                                break;
+                            case 'c' : setMazeElement(y, (x+j), new Inky(x+j, y, new InkyBehaviour()));
+                                break;
+                            case 'o' : setMazeElement(y, (x+j), new Clyde(x+j, y, new ClydeBehaviour()));
+                                break;
+                            case 'P' : setMazeElement(y, (x+j), new Pill(x+j, y));
+                                break;
+                            case 'd' : setMazeElement(y, (x+j), new Dot(x+j, y));
+                                break;
+                            case 'W' : setMazeElement(y, (x+j), new Wall(x+j, y));
+                                break;
+                            case '_' : setMazeElement(y, (x+j), new Empty(x+j, y));
+                                break;
+                            default:
+                            	break;
+                        }
+                }
+                x+=counter;
+                /*
                 //Klaus is working on this part. Will fix in a moment... >_>
                 try {
                 	counter = Integer.parseInt(Character.toString(startConfig.charAt(i)));//this method only supports expressions chars 1-9.
@@ -100,11 +139,8 @@ public class Maze {
                         }
                     }
                     x+=counter;                                                     //shift x's position.
+                    */
                 }
-
-
-
-
             }
         }
     }
@@ -152,7 +188,7 @@ public class Maze {
             this.powerPillTurns = Integer.parseInt(vars[2]);
             this.score = Integer.parseInt(vars[3]);
             this.lives = Integer.parseInt(vars[4]);
-            this.maze = new MazeElement[this.columns][this.rows];
+            this.maze = new MazeElement[this.rows][this.columns];
             setMaze(vars[5]);
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -422,13 +458,17 @@ public class Maze {
     }
     
     public void printMaze() {
-        System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
-        for (int i = 0; i < this.columns; i++) {
-            for (int j = 0; j < this.rows; j++) {
-                System.out.print(this.maze[i][j].toString());
-            }
-            System.out.println();
-        }
+    	try {
+    		System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
+    		for (int i = 0; i < this.rows; i++) {
+    			for (int j = 0; j < this.columns; j++) {
+    				System.out.print(this.maze[i][j].toString());
+    			}
+    			System.out.println();
+    		}
+    	} catch (NullPointerException e) {
+    		e.printStackTrace();
+    	}
     }
 
 }
