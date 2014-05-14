@@ -76,15 +76,15 @@ public class Maze {
                     currentElement = startConfig.charAt(i);
                     for (int j = x; j < x+counter;i++) {                            // Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // placeholder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour());
+                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour(), score));
                                 break;
-                            case 'r' : setMazeElement(y, (x+i), new Blinky(x+i, y, new BlinkyBehaviour());
+                            case 'r' : setMazeElement(y, (x+i), new Blinky(x+i, y, new BlinkyBehaviour()));
                                 break;
-                            case 'p' : setMazeElement(y, (x+i), new Pinky(x+i, y, new PinkyBehaviour());
+                            case 'p' : setMazeElement(y, (x+i), new Pinky(x+i, y, new PinkyBehaviour()));
                                 break;
-                            case 'c' : setMazeElement(y, (x+i), new Inky(x+i, y, new InkyBehaviour());
+                            case 'c' : setMazeElement(y, (x+i), new Inky(x+i, y, new InkyBehaviour()));
                                 break;
-                            case 'o' : setMazeElement(y, (x+i), new Clyde(x+i, y, new ClydeBehaviour());
+                            case 'o' : setMazeElement(y, (x+i), new Clyde(x+i, y, new ClydeBehaviour()));
                                 break;
                             case 'P' : setMazeElement(y, (x+i), new Pill(x+i, y));
                                 break;
