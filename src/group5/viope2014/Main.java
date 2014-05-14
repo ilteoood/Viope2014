@@ -1,14 +1,8 @@
 package group5.viope2014;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Main
 {
-    public static void main(String[] args)
+/*    public static void main(String[] args)
     {
         int column,row,pillDuration,score,nLife;
         try
@@ -43,12 +37,12 @@ public class Main
         catch (IOException e)
         {System.out.println(e.getMessage());}
     }
-    /*
+  */
     public static void main(String[] args) {
     	Maze field = new Maze("filename.txt");
     	field.reload();
     	field.printMaze();
     	System.exit(0);
     }
-    */
+
 }
