@@ -2,9 +2,9 @@ package group5.viope2014;
 
 public class Inky extends Enemy
 {
-    public Inky (int x, int y, Behaviour b)
+    public Inky (int x, int y)
     {
-        super(b);
+        super(new InkyBehaviour());
         super.move(x,y);
     }
     @Override

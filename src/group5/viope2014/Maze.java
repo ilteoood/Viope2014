@@ -87,7 +87,7 @@ public class Maze {
                 	for (int j = x; j < x+counter;j++) {                            // Problem is here !!
             																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, j, new PacMan(j, y);
+                            case 'X' : setMazeElement(y, j, new PacMan(j, y));
                                 break;
                             case 'r' : setMazeElement(y, j, new Blinky(j, y));
                                 break;

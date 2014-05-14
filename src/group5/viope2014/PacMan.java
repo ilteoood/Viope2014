@@ -7,9 +7,9 @@ public class PacMan extends MobileElement
     private boolean vulnerable=true;
     private int points=0;
         
-    public PacMan(int x, int y, Behaviour bev, int points)
+    public PacMan(int x, int y)
     {
-        super(bev);
+        super(new PacManBehaviour());
         super.move(x,y);
         this.points=points;
     }
@@ -35,15 +35,6 @@ public class PacMan extends MobileElement
     {
         lifes-=(vulnerable==true?1:0);
     }
-
-    public boolean isDead()
-    {
-        return (lifes==0?true:false);
-    }
-
-    public void increasePoints(int points) {this.points+=points;}
-
-    public int getPoints(){return this.points;}
 
     @Override
     public String toString(){return "X";}   /* Return the symbol of Pacman */

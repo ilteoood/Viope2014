@@ -2,9 +2,9 @@ package group5.viope2014;
 
 public class Clyde extends Enemy
 {
-    public Clyde(int x, int y, Behaviour b)
+    public Clyde(int x, int y)
     {
-        super(b);
+        super(new ClydeBehaviour());
         super.move(x,y);
     }
     @Override
