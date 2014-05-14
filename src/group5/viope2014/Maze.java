@@ -70,7 +70,8 @@ public class Maze {
         char currentElement = 'W';
         while (y < this.rows) {
             for (int i = 0; i < startConfig.length(); i++) {
-                if (Character.toString(startConfig.charAt(i)).compareTo("$") == 0) {
+            	//if (startConfig.charAt(i) == '\$') {
+                if (Character.toString(startConfig.charAt(i)).equals("$")) {
                     y++;                                                            // if "$" then next row.
                     x = 0;                                                          // set X to the start of the row.
                     if (y == this.rows) {                                            // terminate the loop. each startConfig String should end with a "$", thus leading to a y == this.rows
@@ -79,11 +80,12 @@ public class Maze {
                     continue;
                 }
                 if (isInteger(Character.toString(startConfig.charAt(i)))) {
-                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i)));
+                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i))) - 1; //Problem is here!!!
                 }
                 else {
                 	currentElement = startConfig.charAt(i);
-                	for (int j = x; j < x+counter;j++) {                            // Might throw IndexOutOfBoundsException
+                	for (int j = x; j < x+counter;j++) {                            // Problem is here !!
+            																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
                             case 'X' : setMazeElement(y, (x+j), new PacMan(x+j, y, new PacManBehaviour(), this.score));
                                 break;
@@ -106,8 +108,10 @@ public class Maze {
                             default:
                             	break;
                         }
+                	}
+                	x+=counter;
                 }
-                x+=counter;
+                
                 /*
                 //Klaus is working on this part. Will fix in a moment... >_>
                 try {
@@ -140,7 +144,6 @@ public class Maze {
                     }
                     x+=counter;                                                     //shift x's position.
                     */
-                }
             }
         }
     }
