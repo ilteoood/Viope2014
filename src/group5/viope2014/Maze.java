@@ -80,30 +80,30 @@ public class Maze {
                     continue;
                 }
                 if (isInteger(Character.toString(startConfig.charAt(i)))) {
-                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i))) - 1; //Problem is here!!!
+                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i))); //Problem is here!!!
                 }
                 else {
                 	currentElement = startConfig.charAt(i);
                 	for (int j = x; j < x+counter;j++) {                            // Problem is here !!
             																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, (x+j), new PacMan(x+j, y, new PacManBehaviour(), this.score));
+                            case 'X' : setMazeElement(y, j, new PacMan(j, y, new PacManBehaviour(), this.score));
                                 break;
-                            case 'r' : setMazeElement(y, (x+j), new Blinky(x+j, y, new BlinkyBehaviour()));
+                            case 'r' : setMazeElement(y, j, new Blinky(j, y, new BlinkyBehaviour()));
                                 break;
-                            case 'p' : setMazeElement(y, (x+j), new Pinky(x+j, y, new PinkyBehaviour()));
+                            case 'p' : setMazeElement(y, j, new Pinky(j, y, new PinkyBehaviour()));
                                 break;
-                            case 'c' : setMazeElement(y, (x+j), new Inky(x+j, y, new InkyBehaviour()));
+                            case 'c' : setMazeElement(y, j, new Inky(j, y, new InkyBehaviour()));
                                 break;
-                            case 'o' : setMazeElement(y, (x+j), new Clyde(x+j, y, new ClydeBehaviour()));
+                            case 'o' : setMazeElement(y, j, new Clyde(j, y, new ClydeBehaviour()));
                                 break;
-                            case 'P' : setMazeElement(y, (x+j), new Pill(x+j, y));
+                            case 'P' : setMazeElement(y, j, new Pill(j, y));
                                 break;
-                            case 'd' : setMazeElement(y, (x+j), new Dot(x+j, y));
+                            case 'd' : setMazeElement(y, j, new Dot(j, y));
                                 break;
-                            case 'W' : setMazeElement(y, (x+j), new Wall(x+j, y));
+                            case 'W' : setMazeElement(y, j, new Wall(j, y));
                                 break;
-                            case '_' : setMazeElement(y, (x+j), new Empty(x+j, y));
+                            case '_' : setMazeElement(y, j, new Empty(j, y));
                                 break;
                             default:
                             	break;
