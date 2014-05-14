@@ -70,13 +70,14 @@ public class Maze {
                     }
                     continue;
                 }
+                //Klaus is working on this part. Will fix in a moment... >_>
                 try {
-                    counter = (int) startConfig.charAt(i);                          //this method only supports expressions chars 1-9.
+                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i)));//this method only supports expressions chars 1-9.
                 } catch (NumberFormatException e) {                                 // Catching the exception works as a trigger for the following loop
                     currentElement = startConfig.charAt(i);
                     for (int j = x; j < x+counter;i++) {                            // Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // placeholder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour(), score));
+                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour(), this.score));
                                 break;
                             case 'r' : setMazeElement(y, (x+i), new Blinky(x+i, y, new BlinkyBehaviour()));
                                 break;
@@ -144,7 +145,7 @@ public class Maze {
             e.printStackTrace();
         }
         //Split the lastLine per each "|"
-        vars = lastLine.split("|");
+        vars = lastLine.split("\\|");
         try {
             this.rows = Integer.parseInt(vars[0]);
             this.columns = Integer.parseInt(vars[1]);
