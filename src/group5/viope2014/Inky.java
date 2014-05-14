@@ -7,4 +7,6 @@ public class Inky extends Enemy
         super(b);
         super.move(x,y);
     }
+    @Override
+    public String toString(){return "c";}   /* Return the symbol of Inky */
 }

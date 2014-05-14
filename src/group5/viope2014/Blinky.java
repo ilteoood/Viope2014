@@ -7,4 +7,6 @@ public class Blinky extends Enemy
         super(b);
         super.move(x,y);
     }
+    @Override
+    public String toString(){return "r";}   /* Return the symbol of Blinky */
 }

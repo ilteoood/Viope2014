@@ -7,4 +7,6 @@ public class Clyde extends Enemy
         super(b);
         super.move(x,y);
     }
+    @Override
+    public String toString(){return "o";}   /* Return the symbol of Clyde */
 }

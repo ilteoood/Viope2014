@@ -112,38 +112,7 @@ public class Maze {
                 	x+=counter;
                 }
                 
-                /*
-                //Klaus is working on this part. Will fix in a moment... >_>
-                try {
-                	counter = Integer.parseInt(Character.toString(startConfig.charAt(i)));//this method only supports expressions chars 1-9.
-                } catch (NumberFormatException e) {                                 // Catching the exception works as a trigger for the following loop
-                    currentElement = startConfig.charAt(i);
-                    for (int j = x; j < x+counter;i++) {                            // Might throw IndexOutOfBoundsException
-                        switch (currentElement) {                                   // placeholder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, (x+i), new PacMan(x+i, y, new PacManBehaviour(), this.score));
-                                break;
-                            case 'r' : setMazeElement(y, (x+i), new Blinky(x+i, y, new BlinkyBehaviour()));
-                                break;
-                            case 'p' : setMazeElement(y, (x+i), new Pinky(x+i, y, new PinkyBehaviour()));
-                                break;
-                            case 'c' : setMazeElement(y, (x+i), new Inky(x+i, y, new InkyBehaviour()));
-                                break;
-                            case 'o' : setMazeElement(y, (x+i), new Clyde(x+i, y, new ClydeBehaviour()));
-                                break;
-                            case 'P' : setMazeElement(y, (x+i), new Pill(x+i, y));
-                                break;
-                            case 'd' : setMazeElement(y, (x+i), new Dot(x+i, y));
-                                break;
-                            case 'W' : setMazeElement(y, (x+i), new Wall(x+i, y));
-                                break;
-                            case '_' : setMazeElement(y, (x+i), new Empty(x+i, y));
-                                break;
-                            default:
-                            	break;
-                        }
-                    }
-                    x+=counter;                                                     //shift x's position.
-                    */
+
             }
         }
     }

@@ -44,4 +44,7 @@ public class PacMan extends MobileElement
     public void increasePoints(int points) {this.points+=points;}
 
     public int getPoints(){return this.points;}
+
+    @Override
+    public String toString(){return "X";}   /* Return the symbol of Pacman */
 }
