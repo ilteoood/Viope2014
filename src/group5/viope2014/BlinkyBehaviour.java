@@ -4,11 +4,18 @@ public class BlinkyBehaviour extends Behaviour
 {
     private int direction = choseDirection.Move_Left;
 
+    public BlinkyBehaviour(int x,int y)
+    {
+        super(x,y);
+    }
+
     @Override
-    public int[] move(int dir)
+    public int[] move(int dir,int nowX,int nowY)
     {
         int[] directionArray=choseDirection.getMovement(dir);
-        return new int[]{directionArray[0]+super.getOldX(),directionArray[1]+super.getOldY()};
+        super.setOldX(nowX);
+        super.setOldY(nowY);
+        return new int[]{directionArray[0]+nowX,directionArray[1]+nowY};
     }
 
     @Override
@@ -27,5 +34,26 @@ public class BlinkyBehaviour extends Behaviour
     public int getDefDirection()
     {
         return choseDirection.Move_Left;
+    }
+
+    @Override
+    public int getNextDir()
+    {
+        switch(this.direction)
+        {
+            case choseDirection.Move_Left:
+                this.direction=choseDirection.Move_Down;
+                break;
+            case choseDirection.Move_Right:
+                this.direction=choseDirection.Move_Up;
+                break;
+            case choseDirection.Move_Up:
+                this.direction=choseDirection.Move_Left;
+                break;
+            case choseDirection.Move_Down:
+                this.direction=choseDirection.Move_Right;
+                break;
+        }
+        return this.direction;
     }
 }

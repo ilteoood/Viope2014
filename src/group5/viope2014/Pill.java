@@ -17,7 +17,7 @@ public class Pill extends MazeElement
     @Override
     public String toString(){return "P";}   /* Return the symbol of Power Pill */
     
-    public int getPoints()
+    public static int getPoints()
     {
         return 50; // Returns the value points of each pill
     }

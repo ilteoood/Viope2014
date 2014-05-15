@@ -7,9 +7,17 @@ public abstract class Behaviour
     private int direction=-1;
 
     public Behaviour()
-    {}
+    {
 
-    public abstract int[] move(int dir);
+    }
+
+    public Behaviour(int x,int y)
+    {
+        this.oldX=x;
+        this.oldY=y;
+    }
+
+    public abstract int[] move(int dir,int nowX,int nowY);
 
     public int getOldX() 
     {
@@ -34,4 +42,5 @@ public abstract class Behaviour
     public abstract int getDirection();
     public abstract void setDirection(int dir);
     public abstract int getDefDirection();
+    public abstract int getNextDir();
 }

@@ -11,4 +11,9 @@ public abstract class MobileElement extends MazeElement
     {
         this.bev=b; // =)
     }
+
+    public Behaviour getBehaviour()
+    {
+        return this.bev;
+    }
 }

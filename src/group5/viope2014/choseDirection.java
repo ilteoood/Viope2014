@@ -8,8 +8,8 @@ public class choseDirection
     public static final int Move_Up=2;
     public static final int Move_Down=3;
 
-    private static final int x[]={1,-1,0,0};
-    private static final int y[]={0,0,1,-1};
+    private static final int x[]={0,0,-1,1};
+    private static final int y[]={1,-1,0,0};
     public static int[] getMovement(int dir)
     {
         int ret[]=new int[2];

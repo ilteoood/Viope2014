@@ -22,7 +22,7 @@ public class Dot extends MazeElement
         return "d";
     }
 
-    public int getPoints()
+    public static int getPoints()
     {
         return 10; // Returns the value points of each dot
     }
