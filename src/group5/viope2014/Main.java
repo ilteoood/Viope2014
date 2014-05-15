@@ -1,10 +1,15 @@
 package group5.viope2014;
 
+import java.util.Scanner;
+
 public class Main
 {
 
     public static void main(String[] args) {
-    	Maze field = new Maze("filename.txt");
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("Type path of file to open: ");
+    	String file = sc.nextLine();
+    	Maze field = new Maze(file);
     	System.out.println(field.toString());
     	field.printMaze();
     	field.newMaze();
