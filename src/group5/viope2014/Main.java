@@ -7,10 +7,8 @@ public class Main
     	Maze field = new Maze("filename.txt");
     	System.out.println(field.toString());
     	field.printMaze();
-    	field.write();
-    	field.reload();
-    	field.printMaze();
-    	field.backup("backup.txt");
+    	field.newMaze();
+    	System.out.print("System exit.");
     	System.exit(0);
     }
 

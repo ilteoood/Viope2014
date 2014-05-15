@@ -1,6 +1,7 @@
 package group5.viope2014;
 
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Created by Dzar87 on 15.4.2014.
@@ -454,4 +455,54 @@ public class Maze {
     	}
     }
 
+    public void newMaze() {
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("Insert maze configuration {rows}|{columns}|{powerpillturns}|" +
+    			"{score}|{lives}, 10|10|0|0|3|, : ");
+    	String newConfiguration = sc.nextLine();
+    	String[] input = newConfiguration.split("\\|");
+    	int[] conf = new int[input.length];
+    	for (int i = 0; i < input.length;i++) {
+    		conf[i] = Integer.parseInt(input[i]);
+    	}
+    	System.out.println("Insert the maze setup one symbol at a time, separating rows with a '$', WWWWWWWWW$WWWWW etc. : ");
+    	String userInput = sc.nextLine();
+    	
+    	int y = 0, counter = 1;
+    	char currentElement = userInput.charAt(0);
+    	
+    	while (y < conf[0]) {
+    		for (int i = 0; i < userInput.length(); i++) {
+    			if (userInput.charAt(i) == '$') {
+    				y++;
+    				newConfiguration += (String.valueOf(counter) + String.valueOf(currentElement) + "$");
+    				counter = 1;
+    				if (y == conf[0]) {
+    					break;
+    				}
+    				currentElement = userInput.charAt(i+1);
+    				continue;
+    			}
+    			else if (counter == 9) {
+    				newConfiguration += (String.valueOf(counter) + String.valueOf(currentElement));
+    				counter = 1;
+    				currentElement = userInput.charAt(i+1);
+    				continue;
+    			}
+    			else if (currentElement == userInput.charAt(i)) {
+    				counter++;
+    				continue;
+    			}
+    			else {
+    				newConfiguration += (String.valueOf(counter) + String.valueOf(currentElement));
+    				counter = 1;
+    				currentElement = userInput.charAt(i);
+    				continue;
+    			}
+    			
+    			
+    		}
+    	}
+    	System.out.println(newConfiguration);
+    }
 }
