@@ -490,7 +490,7 @@ public class Maze {
     		e.printStackTrace();
     	}
     		
-    	int y = 0, counter = 1;
+    	int y = 0, counter = 0;
     	char currentElement = userInput.charAt(0);
     	
     	while (y < conf[0]) {
@@ -498,7 +498,7 @@ public class Maze {
     			if (userInput.charAt(i) == '$') {
     				y++;
     				newConfiguration += (String.valueOf(counter) + String.valueOf(currentElement) + "$");
-    				counter = 1;
+    				counter = 0;
     				if (y == conf[0]) {
     					break;
     				}
