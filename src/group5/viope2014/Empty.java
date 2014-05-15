@@ -10,7 +10,7 @@ public class Empty extends MazeElement
 
     /* Return the symbol of Empty */
     @Override 
-    public String toString() {return " ";}
+    public String toString() {return "_";}
 
     /* Return the offset =0 because the element can't be moved */
     @Override

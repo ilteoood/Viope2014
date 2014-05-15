@@ -10,6 +10,7 @@ public class Main
     	field.write();
     	field.reload();
     	field.printMaze();
+    	field.backup("backup.txt");
     	System.exit(0);
     }
 
