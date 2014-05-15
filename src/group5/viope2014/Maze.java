@@ -20,6 +20,14 @@ public class Maze {
     public String getFilename() {
         return this.filename;
     }
+    
+    public int getRows() {
+    	return this.rows;
+    }
+    
+    public int getColumns() {
+    	return this.columns;
+    }
 
     public void setFilename(String filename) {
         this.filename = filename;
@@ -463,6 +471,9 @@ public class Maze {
     		System.out.println("Insert maze configuration {rows}|{columns}|{powerpillturns}|" +
     				"{score}|{lives}, 10|10|0|0|3|, : ");
     		newConfiguration = sc.nextLine();
+    		if (newConfiguration.isEmpty()) {
+    			return;
+    		}
     		String[] input = newConfiguration.split("\\|");
     		conf = new int[input.length];
     		for (int i = 0; i < input.length;i++) {
@@ -470,6 +481,9 @@ public class Maze {
     		}
     		System.out.println("Insert the maze setup one symbol at a time, separating rows with a '$', WWWWWWWWW$WWWWW etc. : ");
     		userInput = sc.nextLine();
+    		if (userInput.isEmpty()) {
+    			return;
+    		}
     	} catch (NumberFormatException e) {
     		e.printStackTrace();
     	} catch (NullPointerException e) {
@@ -493,7 +507,7 @@ public class Maze {
     			}
     			else if (counter == 9) {
     				newConfiguration += (String.valueOf(counter) + String.valueOf(currentElement));
-    				counter = 1;
+    				counter = 0;
     				currentElement = userInput.charAt(i+1);
     				continue;
     			}
@@ -512,5 +526,6 @@ public class Maze {
     		}
     	}
     	System.out.println(newConfiguration);
+    	System.out.println("Copy the above configuration into a file in order to run it.");
     }
 }
