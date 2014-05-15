@@ -13,6 +13,7 @@ public class Maze {
 
     public Maze(String filename) {
         this.filename = filename;
+        this.reload();
     }
 
     public String getFilename() {
@@ -37,25 +38,34 @@ public class Maze {
 
      @Override public String toString() {
         String currentConfig = "";
-        String currentElement = "W";    //Assuming every maze starts with a wall in the 0,0 position.
-        int counter = 1;
+        String currentElement = maze[0][0].toString();    //Assuming every maze starts with a wall in the 0,0 position.
+        int counter = 0;
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
                 if (currentElement.compareTo(maze[i][j].toString()) == 0) {
                     counter++;
+                    if (counter == 9) {
+                    	currentConfig += (String.valueOf(counter) + currentElement);
+                    	counter = 0;
+                    }
                 }
                 else {
-                    currentConfig += String.valueOf(counter) + currentElement;
+                    currentConfig += (String.valueOf(counter) + currentElement);
                     currentElement = maze[i][j].toString();
                     counter = 1;
                 }
-
             }
-            currentConfig += "$";
+            currentConfig += (String.valueOf(counter) + currentElement + "$");
+            if (i == (this.rows - 1)) {
+            	break;
+            }
+            counter = 0;
+            currentElement = maze[i+1][0].toString();
         }
         return currentConfig;
     }
+     
     public boolean isInteger(String str) {
     	try {
     		int i = Integer.parseInt(str);
@@ -70,8 +80,8 @@ public class Maze {
         char currentElement = 'W';
         while (y < this.rows) {
             for (int i = 0; i < startConfig.length(); i++) {
-            	//if (startConfig.charAt(i) == '\$') {
-                if (Character.toString(startConfig.charAt(i)).equals("$")) {
+            	if (startConfig.charAt(i) == '$') {
+                //if (Character.toString(startConfig.charAt(i)).equals("$")) {
                     y++;                                                            // if "$" then next row.
                     x = 0;                                                          // set X to the start of the row.
                     if (y == this.rows) {                                            // terminate the loop. each startConfig String should end with a "$", thus leading to a y == this.rows
@@ -162,8 +172,9 @@ public class Maze {
             this.lives = Integer.parseInt(vars[4]);
             this.maze = new MazeElement[this.rows][this.columns];
             setMaze(vars[5]);
+            //System.out.println(vars[5]);						//REMOVE THIS LATER!
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            e.printStackTrace();								//in case the file stat config contains non-integers
         } catch (IndexOutOfBoundsException e) {                 //in case the file startConfig is different from this.rows and this.columns
             e.printStackTrace();
         }
