@@ -12,7 +12,12 @@ public class Main
     	Maze field = null;
     	while (userInput != '4') {
     		System.out.print("\n1\tLoad\n2\tSave\n3\tMaze \"Editor\"\n\n4\tExit\n");
-    		userInput = sc.nextLine().charAt(0);
+    		try {
+    			userInput = sc.nextLine().charAt(0);
+    		}
+    		catch (StringIndexOutOfBoundsException e) {
+    			userInput = '0';
+    		}
     		switch (userInput) {
     			case '1': 	//ADD cls here
     						System.out.println("Type path of file to open: ");
