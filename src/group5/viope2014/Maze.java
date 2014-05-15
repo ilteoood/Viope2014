@@ -456,18 +456,26 @@ public class Maze {
     }
 
     public void newMaze() {
-    	Scanner sc = new Scanner(System.in);
-    	System.out.println("Insert maze configuration {rows}|{columns}|{powerpillturns}|" +
-    			"{score}|{lives}, 10|10|0|0|3|, : ");
-    	String newConfiguration = sc.nextLine();
-    	String[] input = newConfiguration.split("\\|");
-    	int[] conf = new int[input.length];
-    	for (int i = 0; i < input.length;i++) {
-    		conf[i] = Integer.parseInt(input[i]);
+    	String newConfiguration = null, userInput = null;
+    	int[] conf = null;
+    	try {
+    		Scanner sc = new Scanner(System.in);
+    		System.out.println("Insert maze configuration {rows}|{columns}|{powerpillturns}|" +
+    				"{score}|{lives}, 10|10|0|0|3|, : ");
+    		newConfiguration = sc.nextLine();
+    		String[] input = newConfiguration.split("\\|");
+    		conf = new int[input.length];
+    		for (int i = 0; i < input.length;i++) {
+    			conf[i] = Integer.parseInt(input[i]);
+    		}
+    		System.out.println("Insert the maze setup one symbol at a time, separating rows with a '$', WWWWWWWWW$WWWWW etc. : ");
+    		userInput = sc.nextLine();
+    	} catch (NumberFormatException e) {
+    		e.printStackTrace();
+    	} catch (NullPointerException e) {
+    		e.printStackTrace();
     	}
-    	System.out.println("Insert the maze setup one symbol at a time, separating rows with a '$', WWWWWWWWW$WWWWW etc. : ");
-    	String userInput = sc.nextLine();
-    	
+    		
     	int y = 0, counter = 1;
     	char currentElement = userInput.charAt(0);
     	
