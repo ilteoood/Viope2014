@@ -106,7 +106,7 @@ public class Maze {
                 	for (int j = x; j < x+counter;j++) {                            // Problem is here !!
             																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, j, new PacMan(j, y));
+                            case 'X' : setMazeElement(y, j, new PacMan(j, y, this.powerPillTurns));
                                 break;
                             case 'r' : setMazeElement(y, j, new Blinky(j, y));
                                 break;
@@ -211,9 +211,8 @@ public class Maze {
                 if(mazE instanceof PacMan)
                 {
                     PacMan pac = (PacMan)mazE;
+                    pac.decreaseTurns();
                     PacManBehaviour pacb = (PacManBehaviour)pac.getBehaviour();
-               //     int pos[] = pacb.move(pacb.getDirection(),i,j);
-               //     if(this.maze[pos[0]][pos[1]]instanceof Wall)
                     int[] pos=checkWallforPacman(i,j,pacb);
                     if(this.maze[pos[0]][pos[1]]instanceof Enemy)
                     {
@@ -236,6 +235,7 @@ public class Maze {
                     }
                     else if(this.maze[pos[0]][pos[1]] instanceof Pill)
                     {
+                        pac.pillEat();
                         this.score+=Pill.getPoints();
                     }
                     else if(this.maze[pos[0]][pos[1]] instanceof Dot)

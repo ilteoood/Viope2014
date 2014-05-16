@@ -42,16 +42,16 @@ public class PacManBehaviour extends Behaviour
         switch(this.direction)
         {
             case choseDirection.Move_Left:
-                this.direction=choseDirection.Move_Up;
-                break;
-            case choseDirection.Move_Right:
                 this.direction=choseDirection.Move_Down;
                 break;
+            case choseDirection.Move_Right:
+                this.direction=choseDirection.Move_Up;
+                break;
             case choseDirection.Move_Up:
-                this.direction=choseDirection.Move_Right;
+                this.direction=choseDirection.Move_Left;
                 break;
             case choseDirection.Move_Down:
-                this.direction=choseDirection.Move_Left;
+                this.direction=choseDirection.Move_Right;
                 break;
         }
         return this.direction;
