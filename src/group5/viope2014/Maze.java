@@ -249,26 +249,31 @@ public class Maze {
                 }
                 if(mazE instanceof Enemy)
                 {
+                    boolean notEmpty=false;
                     Enemy enem = (Enemy) mazE;
                     Behaviour b = enem.getBehaviour();
+                    if(enem.getOverleap())
+                    {
+                        enem.resetOverleapPos();
+                        if(enem.getType()==Enemy.pill)
+                            this.maze[i][j]=new Pill(i,j);
+                        else if(enem.getType()==Enemy.dot)
+                            this.maze[i][j]=new Dot(i,j);
+                        notEmpty=true;
+                    }
                     int pos[]=checkWallforEnemy(i,j,b);
                     if(this.maze[pos[0]][pos[1]] instanceof Pill)
                     {
                         enem.setOverleap();
                         enem.setType(Enemy.pill);
-                        enem.setverleapPos(i,j);
+                    }
+                    else if(this.maze[pos[0]][pos[1]] instanceof Dot)
+                    {
+                        enem.setOverleap();
+                        enem.setType(Enemy.dot);
                     }
                     this.maze[pos[0]][pos[1]]=enem;
-                    int overpos[];
-                    if(enem.getOverleap())
-                    {
-                        overpos=enem.getOverleapPos();
-                        if(enem.getType()==Enemy.pill)
-                            this.maze[overpos[0]][overpos[1]]=new Pill(overpos[0],overpos[1]);
-                        else if(enem.getType()==Enemy.dot)
-                            this.maze[overpos[0]][overpos[1]]=new Dot(overpos[0],overpos[1]);
-                    }
-                    else
+                    if(!notEmpty)
                     {
                         this.maze[i][j] = new Empty(i, j);
                     }

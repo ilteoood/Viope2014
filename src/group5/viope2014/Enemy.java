@@ -6,7 +6,6 @@ public class Enemy extends MobileElement
     public static final int dot=0x1;
     private boolean overleap=false;
     private int type=-1;
-    private int[] overPos={-1,-1};
 	public Enemy (Behaviour bev)
 	{
 		super(bev);
@@ -14,7 +13,6 @@ public class Enemy extends MobileElement
 
     public boolean getOverleap()
     {
-        this.overleap=false;
         return this.overleap;
     }
 
@@ -23,15 +21,9 @@ public class Enemy extends MobileElement
         this.overleap=true;
     }
 
-    public void setverleapPos(int x, int y)
+    public void resetOverleapPos()
     {
-        this.overPos[0]=x;
-        this.overPos[1]=y;
-    }
-
-    public int[] getOverleapPos()
-    {
-        return this.overPos;
+        this.overleap=false;
     }
 
     public void setType(int type)
