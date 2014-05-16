@@ -37,7 +37,7 @@ public class Maze {
         this.maze[y][x] = element;
     }
 
-    MazeElement getMazeElement(int y, int x) {
+    public MazeElement getMazeElement(int y, int x) {
         return this.maze[y][x];
     }
 
@@ -245,6 +245,7 @@ public class Maze {
                     }
                     this.maze[pos[0]][pos[1]]=pac;
                     this.maze[i][j]=new Empty(i,j);
+                    this.printMaze();
                 }
                 if(mazE instanceof Enemy)
                 {
@@ -271,9 +272,9 @@ public class Maze {
                     {
                         this.maze[i][j] = new Empty(i, j);
                     }
+                    this.printMaze();
                 }
             }
-            this.printMaze();
         }
     }
 
