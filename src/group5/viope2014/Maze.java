@@ -200,9 +200,10 @@ public class Maze {
         }
     }
 
-    //Not touching this
-    public void move() throws EndGameException {
+    public void move() throws EndGameException
+    {
         MazeElement mazE;
+        int[]nextPos;
         for(int i=0;i<this.maze.length;i++)
         {
             for(int j=0;j<this.maze[i].length;j++)
@@ -210,99 +211,97 @@ public class Maze {
                 mazE=this.maze[i][j];
                 if(mazE instanceof PacMan)
                 {
-                    PacMan pac = (PacMan)mazE;
-                    pac.decreaseTurns();
-                    PacManBehaviour pacb = (PacManBehaviour)pac.getBehaviour();
-                    int[] pos=checkWallforPacman(i,j,pacb);
-                    if(this.maze[pos[0]][pos[1]]instanceof Enemy)
+                    boolean gonext=true;
+                    this.maze[i][j]=new Empty(i,j);
+                    ((PacMan) mazE).decreaseTurns();
+                    nextPos=this.checkforPacman(i,j,((PacMan) mazE).getBehaviour());
+                    if(this.maze[nextPos[0]][nextPos[1]] instanceof Pill)
                     {
-                        if(pac.isVulnerable())
+                        this.score += Pill.getPoints();
+                        ((PacMan) mazE).pillEat();
+                    }
+                    else if(this.maze[nextPos[0]][nextPos[1]] instanceof Dot)
+                        this.score+=Dot.getPoints();
+                    else if(this.maze[nextPos[0]][nextPos[1]] instanceof Enemy)
+                    {
+                        if(((PacMan) mazE).isVulnerable())
                         {
                             this.lives--;
                             if(this.lives==0)
-                            {
-                                throw new EndGameException ("PacMan is dead!");
-                            }
-                            else
-                            {
-                                this.maze[i][j]=new Empty(i,j);
-                                pac.move(pac.getDefY(), pac.getDefX());
-                                pacb.setDirection(pacb.getDefDirection());
-                                this.maze[pac.getDefY()][pac.getDefX()]=pac;
-                                continue;
-                            }
+                                throw new EndGameException("End Game");
+                            // E se al mio osto c'è un bellissimo nemico ??
+                            this.maze[((PacMan) mazE).getDefX()][((PacMan) mazE).getDefY()]=mazE;
+                            gonext=!gonext;
                         }
                     }
-                    else if(this.maze[pos[0]][pos[1]] instanceof Pill)
-                    {
-                        pac.pillEat();
-                        this.score+=Pill.getPoints();
-                    }
-                    else if(this.maze[pos[0]][pos[1]] instanceof Dot)
-                    {
-                        pac.pillEat();
-                        this.score+=Dot.getPoints();
-                    }
-                    this.maze[pos[0]][pos[1]]=pac;
-                    this.maze[i][j]=new Empty(i,j);
-                    this.printMaze();
+                    if(gonext)
+                        this.maze[nextPos[0]][nextPos[1]]=mazE;
                 }
-                if(mazE instanceof Enemy)
+                else if(mazE instanceof Enemy)
                 {
-                    boolean notEmpty=false;
-                    Enemy enem = (Enemy) mazE;
-                    Behaviour b = enem.getBehaviour();
-                    if(enem.getOverleap())
+                    boolean gonext=true;
+                    // Restore pill or dot
+                    if(((Enemy) mazE).getOverleap())
                     {
-                        enem.resetOverleapPos();
-                        if(enem.getType()==Enemy.pill)
+                        if(((Enemy) mazE).getType()==Enemy.pill)
                             this.maze[i][j]=new Pill(i,j);
-                        else if(enem.getType()==Enemy.dot)
+                        else if(((Enemy) mazE).getType()==Enemy.dot)
                             this.maze[i][j]=new Dot(i,j);
-                        notEmpty=true;
                     }
-                    int pos[]=checkWallforEnemy(i,j,b);
-                    if(this.maze[pos[0]][pos[1]] instanceof Pill)
+                    else
+                        this.maze[i][j]=new Empty(i,j);
+                    // *****************************************************************
+                    nextPos=this.checkforEnemy(i, j, ((Enemy) mazE).getBehaviour());
+                    if(this.maze[nextPos[0]][nextPos[1]] instanceof Pill)
                     {
-                        enem.setOverleap();
-                        enem.setType(Enemy.pill);
+                        ((Enemy) mazE).setOverleap();
+                        ((Enemy) mazE).setType(Enemy.pill);
                     }
-                    else if(this.maze[pos[0]][pos[1]] instanceof Dot)
+                    else if(this.maze[nextPos[0]][nextPos[1]] instanceof Dot)
                     {
-                        enem.setOverleap();
-                        enem.setType(Enemy.dot);
+                        ((Enemy) mazE).setOverleap();
+                        ((Enemy) mazE).setType(Enemy.dot);
                     }
-                    this.maze[pos[0]][pos[1]]=enem;
-                    if(!notEmpty)
+                    else if(this.maze[nextPos[0]][nextPos[1]] instanceof PacMan)
                     {
-                        this.maze[i][j] = new Empty(i, j);
+                        PacMan pacman = (PacMan)this.maze[nextPos[0]][nextPos[1]];
+                        // e se io sono nel punto di generazione di pacman ?
+                        if(pacman.isVulnerable())
+                        {
+                            this.lives--;
+                            if(this.lives==0)
+                                throw new EndGameException("End Game");
+                            // E se al mio osto c'è un bellissimo nemico ??
+                            this.maze[pacman.getDefX()][pacman.getDefY()]=mazE;
+                        }
+                        else
+                            gonext=!gonext;
                     }
-                    this.printMaze();
+                    if(gonext)
+                        this.maze[nextPos[0]][nextPos[1]]=mazE;
                 }
             }
+            this.printMaze();
         }
     }
 
-    private int[] checkWallforEnemy(int i,int j,Behaviour bev)
+
+    private int[] checkforEnemy(int i,int j,Behaviour bev)
     {
         int pos[]=bev.move(bev.getDirection(),i,j);
-        while(this.maze[pos[0]][pos[1]] instanceof Wall||this.maze[pos[0]][pos[1]] instanceof Enemy||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length)
-        {
+        while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall||this.maze[pos[0]][pos[1]] instanceof Enemy)
             pos=bev.move(bev.getNextDir(),i,j);
-        }
         return  pos;
     }
 
-    private int[] checkWallforPacman(int i,int j,Behaviour bev)
+    private int[] checkforPacman(int i,int j,Behaviour bev)
     {
         int pos[]=bev.move(bev.getDirection(),i,j);
-        while(this.maze[pos[0]][pos[1]] instanceof Wall||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length)
-        {
+        while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall)
             pos=bev.move(bev.getNextDir(),i,j);
-        }
         return  pos;
     }
-    
+
     public void printMaze() {
     	try {
     		System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
