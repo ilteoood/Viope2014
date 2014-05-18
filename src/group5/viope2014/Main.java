@@ -25,10 +25,18 @@ public class Main
 					    //ADD cls here
 					    System.out.println("Type path of file to open: ");
 						file = sc.nextLine();
+						if(file.equals("-")){
+							file="testMazes/emptyMaze.txt";
+						}
 						field = new Maze(file);
+						System.out.println("Initial config :");
+						field.printMaze();
+						System.out.println("Game Starts :");
 						while(true)
-						{
+						{		
                             field.move();
+                            System.out.println("Press enter to continue ...");
+                            sc.nextLine();
                         }
 					case '2':
                         field.write();

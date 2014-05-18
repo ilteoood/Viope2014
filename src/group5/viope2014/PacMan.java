@@ -3,7 +3,7 @@ package group5.viope2014;
 public class PacMan extends MobileElement
 {
     private int defX, defY;
-    private static int defVulnereableTurns;
+    public static final int defVulnereableTurns=5;
     private int vulnerableTurns;
     private boolean vulnerable=true;
         
@@ -12,7 +12,7 @@ public class PacMan extends MobileElement
         super(new PacManBehaviour(x,y));
         defX=x;
         defY=y;
-        this.defVulnereableTurns=turns;
+        this.vulnerableTurns=turns;
         super.move(x,y);
     }
 
