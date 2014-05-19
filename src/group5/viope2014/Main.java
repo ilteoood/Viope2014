@@ -37,6 +37,7 @@ public class Main
 						while(true)
 						{		
                             field.move();
+                            field.printMaze();
                             System.out.println("Press enter to continue ...");
                             sc.nextLine();
                         }
@@ -52,6 +53,7 @@ public class Main
 					case '4' :
 					//ADD cls here
 					System.out.println("Bye, bye!");
+					Music.stopSound();
 					System.exit(0);
 					break;
 				}
@@ -59,6 +61,7 @@ public class Main
 			catch(EndGameException e)
 			{
 				System.out.println("Game ended!");
+				Music.stopSound();
 			}
     		//ADD cls here
     	}
