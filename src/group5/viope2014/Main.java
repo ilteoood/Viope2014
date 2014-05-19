@@ -33,11 +33,13 @@ public class Main
 						field = new Maze(file);
 						System.out.println("Initial config :");
 						field.printMaze();
+						System.out.println(Maze.pcX+" "+Maze.pcY);
 						System.out.println("Game Starts :");
 						while(true)
 						{		
                             field.move();
                             field.printMaze();
+                            System.out.println(Maze.pcX+" "+Maze.pcY);
                             System.out.println("Press enter to continue ...");
                             sc.nextLine();
                         }
