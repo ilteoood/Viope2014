@@ -1,12 +1,14 @@
 package group5.viope2014;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class Main
 {
 
-    public static void main(String[] args) {
-    	Scanner sc = new Scanner(System.in);
+    public static void main(String[] args ) {
+        Music.PlaySound();
+        Scanner sc = new Scanner(System.in);
     	char userInput = '0';
     	String file = null;
     	Maze field = null;
