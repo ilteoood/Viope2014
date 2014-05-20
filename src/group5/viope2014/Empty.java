@@ -1,5 +1,8 @@
 package group5.viope2014;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Empty extends MazeElement
 {
 	public Empty(int x,int y){super.move(x,y);}
@@ -18,4 +21,9 @@ public class Empty extends MazeElement
 
     @Override
     public int getVerticalOffset(int y) {return 0; }
+
+    public static ImageView getPicture()
+    {
+        return new ImageView(new Image("./img/white/empty.png"));
+    }
 }

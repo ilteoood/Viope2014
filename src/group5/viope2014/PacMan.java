@@ -1,5 +1,8 @@
 package group5.viope2014;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class PacMan extends MobileElement
 {
     private int defX, defY;
@@ -37,4 +40,9 @@ public class PacMan extends MobileElement
 
     @Override
     public String toString(){return "X";}   /* Return the symbol of Pacman */
+
+    public static ImageView getPicture()
+    {
+        return new ImageView(new Image("./white/pacmanleft.png"));
+    }
 }

@@ -1,4 +1,8 @@
 package group5.viope2014;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Pill extends MazeElement
 {
 	public Pill(int x, int y) {super.move(x,y);}
@@ -20,5 +24,10 @@ public class Pill extends MazeElement
     public static int getPoints()
     {
         return 50; // Returns the value points of each pill
+    }
+
+    public static ImageView getPicture()
+    {
+        return new ImageView(new Image("./white/pill.png"));
     }
 }

@@ -1,5 +1,8 @@
 package group5.viope2014;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Dot extends MazeElement
 {
 	public Dot(int x, int y) {super.move(x,y);}
@@ -25,5 +28,10 @@ public class Dot extends MazeElement
     public static int getPoints()
     {
         return 10; // Returns the value points of each dot
+    }
+
+    public static ImageView getPicture()
+    {
+        return new ImageView(new Image("./white/dot.png"));
     }
 }

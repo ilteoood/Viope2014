@@ -11,11 +11,16 @@ public class Maze {
 	private MazeElement[][] maze;
     private int  rows, columns, score, powerPillTurns, lives;
     private String filename;
+    private GUI controller;
     //
 
     public Maze(String filename) {
         this.filename = filename;
         this.reload();
+    }
+
+    public void regController(GUI x) {
+        this.controller = x;
     }
 
     public String getFilename() {
@@ -45,6 +50,10 @@ public class Maze {
     public int getLives() {
         return this.lives;
     }
+
+    public int getScore() { return this.score; }
+
+    public int getPowerPillTurns() { return this.powerPillTurns; }
 
      @Override public String toString() {
         String currentConfig = "";
