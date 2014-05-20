@@ -5,6 +5,7 @@ public abstract class Behaviour
     /*Fields*/
     private int oldX, oldY;
     private int direction=-1;
+    private boolean nextIsInvalidPosition=false;
 
     public Behaviour()
     {
@@ -39,6 +40,14 @@ public abstract class Behaviour
         this.oldY = y;
     }
 
+    public void setNextInvalid(boolean status)
+    {
+        this.nextIsInvalidPosition=status;
+    }
+    public boolean getNextInvalid()
+    {
+        return this.nextIsInvalidPosition;
+    }
     public abstract int getDirection();
     public abstract void setDirection(int dir);
     public abstract int getDefDirection();

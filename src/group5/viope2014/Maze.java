@@ -11,7 +11,7 @@ public class Maze {
 	private MazeElement[][] maze;
 	private int  rows, columns, score, powerPillTurns, lives;
 	private String filename;
-	public static int pcX, pcY, eX, eY;
+	public static int pcX, pcY;
 	//
 
 	public Maze(String filename) {
@@ -258,8 +258,6 @@ public class Maze {
 							this.maze[i][j] = new Dot(i, j);
 					} else
 						this.maze[i][j] = new Empty(i, j);
-						Maze.eX = i;
-						Maze.eY = j;
 					// *****************************************************************
 					nextPos = this.checkforEnemy(i, j, ((Enemy) mazE).getBehaviour());
 					if (this.maze[nextPos[0]][nextPos[1]] instanceof Pill) {
@@ -305,7 +303,11 @@ public class Maze {
 	{
 		int pos[]=bev.move(bev.getDirection(),i,j);
 		while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall||this.maze[pos[0]][pos[1]] instanceof Enemy)
+		{
+			bev.setNextInvalid(true);
 			pos=bev.move(bev.getNextDir(),i,j);
+		}
+		bev.setNextInvalid(false);
 		return  pos;
 	}
 

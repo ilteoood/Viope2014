@@ -14,8 +14,11 @@ public class BlinkyBehaviour extends Behaviour
     @Override
     public int[] move(int dir, int nowX, int nowY)
     {
-    	
-        int[] directionArray=choseDirection.getMovement(this.pattern.intMove(0, 0));
+        int[] directionArray;
+        if(!super.getNextInvalid())
+            directionArray=choseDirection.getMovement(this.pattern.intMove(nowX, nowY));
+        else
+            directionArray=choseDirection.getMovement(dir);
         super.setOldX(nowX);
         super.setOldY(nowY);
         return new int[]{directionArray[0]+nowX,directionArray[1]+nowY};
