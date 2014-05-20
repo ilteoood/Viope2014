@@ -27,8 +27,9 @@ public abstract class MobileElement extends MazeElement
 
     public boolean getDead()
     {
-        this.dead=!this.dead;
-        return !this.dead;
+        boolean tmp=this.dead;
+        this.dead=false;
+        return tmp;
     }
 	public boolean hasMoved() {
 		return moved;
