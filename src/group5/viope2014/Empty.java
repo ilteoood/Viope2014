@@ -24,6 +24,6 @@ public class Empty extends MazeElement
 
     public static ImageView getPicture()
     {
-        return new ImageView(new Image("./img/white/empty.png"));
+        return new ImageView(new Image("./white/empty.png"));
     }
 }

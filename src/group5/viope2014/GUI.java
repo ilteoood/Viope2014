@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -19,53 +18,43 @@ import java.io.IOException;
 
 public class GUI extends BorderPane {
 
+    // Global variables
     int width;
     int height;
-
-
     FXMLLoader loader;
     Maze maze;
     @FXML
     BorderPane borderPane;
-
     @FXML
     GridPane gameField;
-
     @FXML
-    HBox top;
-
-    @FXML
-    VBox right, left;
-
+    HBox top, gameOver;
 
     private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            if(event.getCode() == KeyCode.UP) {
+            if (event.getCode() == KeyCode.UP) {
                 try {
                     //your code for moving Pacman
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 event.consume();
-            }
-            else if(event.getCode() == KeyCode.DOWN) {
+            } else if (event.getCode() == KeyCode.DOWN) {
                 try {
                     //your code for moving Pacman
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 event.consume();
-            }
-            else if(event.getCode() == KeyCode.RIGHT) {
+            } else if (event.getCode() == KeyCode.RIGHT) {
                 try {
                     //your code for moving Pacman
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 event.consume();
-            }
-            else if(event.getCode() == KeyCode.LEFT) {
+            } else if (event.getCode() == KeyCode.LEFT) {
                 try {
                     //your code for moving Pacman
                 } catch (Exception e) {
@@ -82,12 +71,10 @@ public class GUI extends BorderPane {
         this.height = maze.getRows();
     }
 
-
     public GUI() {
         loader = new FXMLLoader(getClass().getResource("GUI_fxml.fxml"));
         loader.setController(this);
         loader.setRoot(this);
-
 
         try {
             loader.load();
@@ -95,10 +82,6 @@ public class GUI extends BorderPane {
             e.printStackTrace();
         }
     }
-
-
-    // Global variables
-
 
     public void initialize() {
 
@@ -110,26 +93,10 @@ public class GUI extends BorderPane {
         borderPane.setCenter(gameField);
         borderPane.setTop(top);
         borderPane.setStyle("-fx-background-color: black;");
-
-        //playField.setFont(Font.font("Courier New", FontWeight.BOLD, 18)); /// Set font of text-area
-        //playField.setVisible(false);
-
-        /* Clear playfield button functionality added here
-        clearField.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playField.clear();
-            }
-        });
-        ;
-        */
-
-
     }
 
-    public void readMaze()
+    public void readMaze() {
 
-    {
         String currentElement = null;
         for (int column = 0; column < width; column++) {
             for (int row = 0; row < height; row++) {
@@ -161,18 +128,17 @@ public class GUI extends BorderPane {
                         gameField.add(Dot.getPicture(), column, row);
                         break;
                     case 'W':
-                        gameField.add(Wall.getPicture(),column, row);
+                        gameField.add(Wall.getPicture(), column, row);
                         break;
                     case '_':
-                        gameField.add(new Rectangle(40.0,40.0,Color.WHITE), column, row);
+                        gameField.add(Empty.getPicture(),column,row);
+                        //gameField.add(new Rectangle(40.0, 40.0, Color.WHITE), column, row);
                         break;
                     default:
                         break;
                 }
-
             }
         }
-
         Label score = new Label("Score: " + String.valueOf(maze.getScore()));
         score.setPadding(new Insets(0, 20, 0, 0));
         score.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 20));
@@ -197,10 +163,6 @@ public class GUI extends BorderPane {
 
     public void buildGrid() {
 
-        gameField.setGridLinesVisible(true);
-        //gameField.setHgap(10);
-        //gameField.setVgap(10);
-        //gameField.setPadding(new Insets(0, 10, 0, 10));
 
         for (int i = 0; i < this.width; i++) {
             gameField.getColumnConstraints().add(new ColumnConstraints(40));
@@ -211,12 +173,26 @@ public class GUI extends BorderPane {
         }
 
 
-
     }
 
     public void cls() {
         gameField.getChildren().clear();
         top.getChildren().clear();
+    }
+
+    public void gameOver() {
+        borderPane.getChildren().remove(gameField);
+        //borderPane.getChildren().remove(top);
+        gameOver = new HBox();
+        Label derp = new Label("GAME OVER");
+        //derp.setPadding(new Insets(0, 20, 0, 20));
+        derp.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 50));
+        derp.setTextFill(Color.WHITE);
+        borderPane.setCenter(gameOver); // Game over img - element here
+        gameOver.getChildren().add(derp);
+        gameOver.setAlignment(Pos.CENTER);
+
+
     }
 
 }
