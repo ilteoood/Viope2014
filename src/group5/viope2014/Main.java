@@ -17,6 +17,7 @@ public class Main extends Application {
 
     public GUI controller;
     private Maze field;
+    private boolean endGame = false;
 
 
     /// Used for GUI, please don't modify!
@@ -32,12 +33,12 @@ public class Main extends Application {
         controller.readMaze();
         primaryStage.setTitle("Pacman-simulator by Ghostbusters");
         primaryStage.setMinWidth(9 * 39);
-        primaryStage.setScene(new Scene(controller, field.getColumns() * 39, field.getRows() * 40 + 18));
+        primaryStage.setScene(new Scene(controller, field.getColumns() * 39, field.getRows() * 40 + 14));
         primaryStage.setResizable(false);
         primaryStage.show();
         gameLoop();         //loop 1
         graphicsLoop();     // loop 2
-
+        //controller.gameOver();
             /*Scanner sc = new Scanner(System.in);
             char userInput = '0';
             String file = null;
@@ -94,6 +95,9 @@ public class Main extends Application {
             }*/
 
     }
+    public void setEndGame() {
+        this.endGame = true;
+    }
 
     public void graphicsLoop(){
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
@@ -101,6 +105,10 @@ public class Main extends Application {
             public void handle(ActionEvent actionEvent) {
                 controller.cls();
                 controller.readMaze();
+                if (endGame) {
+                    controller.gameOver();
+                }
+
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -117,7 +125,11 @@ public class Main extends Application {
                 try {
                     field.move();
                 } catch (EndGameException e) {
-                    System.out.println("Game Over");
+                    System.out.println("Game Over"); // Replace with game over -screen
+                    setEndGame();
+                    cancel();
+                    return;
+
                 }
 
             }
