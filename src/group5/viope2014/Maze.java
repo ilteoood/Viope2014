@@ -117,25 +117,25 @@ public class Maze {
                 	for (int j = x; j < x+counter;j++) {                            // Problem is here !!
             																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
-                            case 'X' : setMazeElement(y, j, new PacMan(j, y, this.powerPillTurns));
+                            case 'X' : setMazeElement(y, j, new PacMan(y, j, this.powerPillTurns));
 							Maze.pcX = y;
 							Maze.pcY = j;                                
 								break;
-                            case 'r' : setMazeElement(y, j, new Blinky(j, y));
+                            case 'r' : setMazeElement(y, j, new Blinky(y, j));
                                 break;
-                            case 'p' : setMazeElement(y, j, new Pinky(j, y));
+                            case 'p' : setMazeElement(y, j, new Pinky(y, j));
                                 break;
-                            case 'c' : setMazeElement(y, j, new Inky(j, y));
+                            case 'c' : setMazeElement(y, j, new Inky(y, j));
                                 break;
-                            case 'o' : setMazeElement(y, j, new Clyde(j, y));
+                            case 'o' : setMazeElement(y, j, new Clyde(y, j));
                                 break;
-                            case 'P' : setMazeElement(y, j, new Pill(j, y));
+                            case 'P' : setMazeElement(y, j, new Pill(y, j));
                                 break;
-                            case 'd' : setMazeElement(y, j, new Dot(j, y));
+                            case 'd' : setMazeElement(y, j, new Dot(y, j));
                                 break;
-                            case 'W' : setMazeElement(y, j, new Wall(j, y));
+                            case 'W' : setMazeElement(y, j, new Wall(y, j));
                                 break;
-                            case '_' : setMazeElement(y, j, new Empty(j, y));
+                            case '_' : setMazeElement(y, j, new Empty(y, j));
                                 break;
                             default:
                             	break;
@@ -229,7 +229,7 @@ public class Maze {
         return bev;
     }
 
-    private boolean nextturn=false;
+
     private PacMan pac;
     private Enemy enem;
     public void move() throws EndGameException
@@ -271,10 +271,10 @@ public class Maze {
                                 }
                             }
                             if (gonext){
-						Maze.pcX = nextPos[0];
-						Maze.pcY = nextPos[1];
-						this.maze[nextPos[0]][nextPos[1]] = mazE;
-					}
+                                Maze.pcX = nextPos[0];
+                                Maze.pcY = nextPos[1];
+                                this.maze[nextPos[0]][nextPos[1]] = mazE;
+                            }
                         }
                         else if(mazE instanceof Enemy)
                         {
@@ -311,7 +311,7 @@ public class Maze {
                                     if(this.lives==0)
                                         throw new EndGameException("End Game");
                                     // E se al mio osto c'è un bellissimo nemico ??
-                                    this.maze[pacman.getDefX()][pacman.getDefY()]=mazE;
+                                    this.maze[pacman.getDefX()][pacman.getDefY()]=pacman;
                                 }
                                 else
                                     gonext=!gonext;
@@ -341,7 +341,6 @@ public class Maze {
         }
     }
 
-
     private int[] checkforEnemy(int i,int j,Behaviour bev)
 	{
 		int counter=0;
@@ -364,14 +363,14 @@ public class Maze {
     private int[] checkforPacman(int i,int j,Behaviour bev)
     {
         int pos[]=bev.move(bev.getDirection(),i,j);
-        while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall)
+        while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length)
         {
-            if(this.maze[pos[0]][pos[1]] instanceof Wall){
-                pos[0]=i;
-                pos[1]=j;
-            }
-            else
-                pos=bev.move(bev.getNextDir(),i,j);
+            pos=bev.move(bev.getNextDir(),i,j);
+        }
+        if(this.maze[pos[0]][pos[1]] instanceof Wall)
+        {
+            pos[0]=i;
+            pos[1]=j;
         }
         return pos;
     }

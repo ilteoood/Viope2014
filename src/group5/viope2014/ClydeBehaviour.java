@@ -54,7 +54,7 @@ public class ClydeBehaviour extends Behaviour
                 this.direction=choseDirection.Move_Left;
                 break;
             case choseDirection.Move_Up:
-                this.direction=choseDirection.Move_Down;
+                this.direction=choseDirection.Move_Right;
                 break;
             case choseDirection.Move_Down:
                 this.direction=choseDirection.Move_Up;
