@@ -13,10 +13,10 @@ public class ChaseBehaviour implements ArtificialIntelligence{
 			dir = choseDirection.Move_Down;
 		}
 		else if(yD > 0){
-			dir = choseDirection.Move_Right;
+			dir = choseDirection.Move_Left;
 		}
 		else if(yD < 0){
-			dir = choseDirection.Move_Left;
+			dir = choseDirection.Move_Right;
 		}
 		return dir;
 	}

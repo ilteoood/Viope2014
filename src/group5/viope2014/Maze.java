@@ -212,7 +212,8 @@ public class Maze {
 		int[] nextPos;
 		this.nextturn = false;
 		for (int i = 0; i < this.maze.length; i++) {
-			for (int j = 0; j < this.maze[i].length; j++) {
+			for (int j = 0; j < this.maze[i].length; j++)
+            {
 				mazE = this.maze[i][j];
 				if (mazE instanceof PacMan) {
 					boolean gonext = true;
@@ -295,6 +296,7 @@ public class Maze {
 						this.maze[enem.getX()][enem.getY()] = enem;
 				}
 			}
+            this.printMaze();
 		}
 	}
 
