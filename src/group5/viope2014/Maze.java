@@ -230,7 +230,7 @@ public class Maze {
 							this.lives--;
 							if (this.lives == 0)
 								throw new EndGameException("End Game");
-							pac = (PacMan) this.maze[i][j];
+							pac = (PacMan) mazE;
 							pac.setDead();
 							pac.move(i, j);
 							this.nextturn = true;
@@ -278,7 +278,7 @@ public class Maze {
 							pac.move(i, j);
 							this.nextturn = true;
 						} else {
-							enem = (Enemy) this.maze[i][j];
+							enem = (Enemy) mazE;
 							enem.setDead();
 							enem.move(i, j);
 							this.nextturn = true;
@@ -297,7 +297,6 @@ public class Maze {
 			}
 		}
 	}
-
 
 	private int[] checkforEnemy(int i,int j,Behaviour bev)
 	{
