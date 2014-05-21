@@ -30,12 +30,22 @@ public class PacMan extends MobileElement
     public void decreaseTurns()
     {
         if(this.vulnerableTurns>=0)
-            this.vulnerable=(this.vulnerableTurns--==0?true:false);
+            this.vulnerable=(this.vulnerableTurns--<=0?true:false);
     }
 
     public boolean isVulnerable()
     {
         return this.vulnerable;
+    }
+
+    public int getDefX()
+    {
+        return this.defX;
+    }
+
+	public int getDefY()
+    {
+        return this.defY;
     }
 
     @Override

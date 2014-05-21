@@ -1,31 +1,39 @@
 package group5.viope2014;
 
+import com.sun.javafx.scene.traversal.Direction;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import sun.audio.AudioPlayer;
 
+import java.security.Key;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class Main extends Application {
 
 
     public GUI controller;
     private Maze field;
-    private boolean endGame = false;
-
-
+    private int dir=0;
+    private Behaviour bev;
+    private boolean endGame=false;
     /// Used for GUI, please don't modify!
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
+
         field = new Maze("filename.txt");
         field.reload();
+        bev =field.getPMBev();
         controller = new GUI();
         controller.regMaze(this.field);
         field.regController(controller);
@@ -34,7 +42,25 @@ public class Main extends Application {
         controller.readMaze();
         primaryStage.setTitle("Pacman-simulator by Ghostbusters");
         primaryStage.setMinWidth(9 * 39);
-        primaryStage.setScene(new Scene(controller, field.getColumns() * 39, field.getRows() * 40 + 14));
+        Scene s=new Scene(controller, field.getColumns() * 39, field.getRows() * 40 + 18);
+        s.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+            @Override
+            public void handle(KeyEvent event)
+            {
+                KeyCode kc=event.getCode();
+                if(kc==KeyCode.UP)
+                    dir=choseDirection.Move_Up;
+                else if(kc== KeyCode.DOWN)
+                    dir=choseDirection.Move_Down;
+                else if(kc==KeyCode.LEFT)
+                    dir=choseDirection.Move_Left;
+                else if(kc==KeyCode.RIGHT)
+                    dir=choseDirection.Move_Right;
+                bev.setDirection(dir);
+            }
+        });
+        primaryStage.setScene(s);
         primaryStage.setResizable(false);
         primaryStage.show();
         gameLoop();         //loop 1
@@ -126,16 +152,11 @@ public class Main extends Application {
                 try {
                     field.move();
                 } catch (EndGameException e) {
-<<<<<<< HEAD
-                    System.out.println("Game Over");
-                    AudioPlayer.player.stop();
-=======
                     System.out.println("Game Over"); // Replace with game over -screen
                     setEndGame();
                     cancel();
                     return;
 
->>>>>>> b66b9f7d656719ec97dc1d400d4067647d71ecef
                 }
 
             }

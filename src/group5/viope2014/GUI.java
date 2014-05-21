@@ -30,41 +30,6 @@ public class GUI extends BorderPane {
     @FXML
     HBox top, gameOver;
 
-    private EventHandler<KeyEvent> keyListener = new EventHandler<KeyEvent>() {
-        @Override
-        public void handle(KeyEvent event) {
-            if (event.getCode() == KeyCode.UP) {
-                try {
-                    //your code for moving Pacman
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                event.consume();
-            } else if (event.getCode() == KeyCode.DOWN) {
-                try {
-                    //your code for moving Pacman
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                event.consume();
-            } else if (event.getCode() == KeyCode.RIGHT) {
-                try {
-                    //your code for moving Pacman
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                event.consume();
-            } else if (event.getCode() == KeyCode.LEFT) {
-                try {
-                    //your code for moving Pacman
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                event.consume();
-            }
-        }
-    };
-
     public void regMaze(Maze x) {
         this.maze = x;
         this.width = maze.getColumns();
