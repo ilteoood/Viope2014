@@ -7,7 +7,7 @@ public class Blinky extends Enemy
 {
     public Blinky (int x, int y)
     {
-        super(new BlinkyBehaviour(x,y));
+        super(new BlinkyBehaviour(x,y,new ChaseBehaviour()));
         super.move(x,y);
     }
     @Override

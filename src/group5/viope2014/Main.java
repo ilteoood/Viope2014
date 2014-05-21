@@ -110,12 +110,14 @@ public class Main extends Application {
                         case '4' :
                             //ADD cls here
                             System.out.println("Bye, bye!");
+							Music.stopSound();
                             System.exit(0);
                             break;
                     }
                 }
                 catch(EndGameException e)
                 {
+					Music.stopSound();
                     System.out.println("Game ended!");
                 }
                 //ADD cls here
@@ -165,6 +167,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+		Music.PlaySound();
         launch(args);
 
     }

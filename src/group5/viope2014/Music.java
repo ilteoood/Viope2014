@@ -30,4 +30,8 @@ public class Music extends JFrame implements Runnable {
     public void run() {
 
     }
+    
+    public static void stopSound(){
+    	 AudioPlayer.player.stop();
+    }
 }

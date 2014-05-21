@@ -11,6 +11,7 @@ public class Maze {
 	private MazeElement[][] maze;
     private int  rows, columns, score, powerPillTurns, lives;
     private String filename;
+	public static int pcX, pcY;
     private GUI controller;
     //
 
@@ -117,7 +118,9 @@ public class Maze {
             																		// Might throw IndexOutOfBoundsException
                         switch (currentElement) {                                   // Place holder cases for once the actual MazeElement and Behaviour classes work as intended
                             case 'X' : setMazeElement(y, j, new PacMan(j, y, this.powerPillTurns));
-                                break;
+							Maze.pcX = y;
+							Maze.pcY = j;                                
+								break;
                             case 'r' : setMazeElement(y, j, new Blinky(j, y));
                                 break;
                             case 'p' : setMazeElement(y, j, new Pinky(j, y));
@@ -267,8 +270,11 @@ public class Maze {
                                     gonext=!gonext;
                                 }
                             }
-                            if(gonext)
-                                this.maze[nextPos[0]][nextPos[1]]=mazE;
+                            if (gonext){
+						Maze.pcX = nextPos[0];
+						Maze.pcY = nextPos[1];
+						this.maze[nextPos[0]][nextPos[1]] = mazE;
+					}
                         }
                         else if(mazE instanceof Enemy)
                         {
@@ -337,22 +343,23 @@ public class Maze {
 
 
     private int[] checkforEnemy(int i,int j,Behaviour bev)
-    {
-        int counter=0;
-        int pos[]=bev.move(bev.getDirection(),i,j);
-        while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall ||this.maze[pos[0]][pos[1]] instanceof Enemy)
-        {
-            pos=bev.move(bev.getNextDir(),i,j);
-            counter++;
-            if(counter>4)
+	{
+		int counter=0;
+		int pos[]=bev.move(bev.getDirection(),i,j);
+		while(pos[0]<0||pos[1]<0||pos[0]>=this.maze.length||pos[1]>=this.maze[i].length||this.maze[pos[0]][pos[1]] instanceof Wall||this.maze[pos[0]][pos[1]] instanceof Enemy)
+		{
+			bev.setNextInvalid(true);
+			pos=bev.move(bev.getNextDir(),i,j);
+			if(counter++>4)
             {
                 pos[0]=i;
                 pos[1]=j;
                 break;
             }
-        }
-        return pos;
-    }
+		}
+		bev.setNextInvalid(false);
+		return  pos;
+	}
 
     private int[] checkforPacman(int i,int j,Behaviour bev)
     {
