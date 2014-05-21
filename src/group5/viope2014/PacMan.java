@@ -9,10 +9,13 @@ public class PacMan extends MobileElement
     public static final int defVulnereableTurns=5;
     private int vulnerableTurns;
     private boolean vulnerable=true;
+    private static Behaviour bev;
+    
         
     public PacMan(int x, int y, int turns)
     {
         super(new PacManBehaviour(x,y));
+        this.bev=super.getBehaviour();
         this.vulnerableTurns=turns;
         defX=x;
         defY=y;
@@ -53,6 +56,23 @@ public class PacMan extends MobileElement
 
     public static ImageView getPicture()
     {
-        return new ImageView(new Image("./white/pacmanleft.png"));
+    	String adr="./white/";
+    	switch (PacMan.bev.getDirection()){
+		case choseDirection.Move_Right:
+			adr=adr+"pacmanright.png";
+			break;
+		case choseDirection.Move_Up:
+			adr=adr+"pacmanup.png";
+			break;
+		case choseDirection.Move_Down:
+			adr=adr+"pacmandown.png";
+			break;
+		case choseDirection.Move_Left:
+			adr=adr+"pacmanleft.png";
+			break;
+		}
+    	
+    	
+        return new ImageView(new Image(adr));
     }
 }
