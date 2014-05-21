@@ -13,19 +13,17 @@ public class UndecidedBehaviour implements ArtificialIntelligence
             return rnd.nextInt(4);
         else if(r>15&&r<29)
         {
-            int xD = x - Maze.pcX;
-            int yD = y - Maze.pcY;
-            int dir=-1;
-            if(xD > 0){
+            int dir=4;
+            if(x > Maze.pcX){
                 dir = choseDirection.Move_Up;
             }
-            else if(xD < 0){
+            else if(x < Maze.pcX){
                 dir = choseDirection.Move_Down;
             }
-            else if(yD > 0){
+            else if(y > Maze.pcY){
                 dir = choseDirection.Move_Left;
             }
-            else if(yD < 0){
+            else if(y < Maze.pcY){
                 dir = choseDirection.Move_Right;
             }
             return dir;

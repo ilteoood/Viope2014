@@ -3,7 +3,7 @@ package group5.viope2014;
 public class ChaseBehaviour implements ArtificialIntelligence{
 	
 	public int intMove(int x, int y){
-		int dir=-1;
+		int dir=4;
 		if(x > Maze.pcX){
 			dir = choseDirection.Move_Up;
 		}

@@ -31,7 +31,7 @@ public class Main extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-        field = new Maze("filename.txt");
+        field = new Maze("largefield.txt");
         field.reload();
         bev =field.getPMBev();
         controller = new GUI();
