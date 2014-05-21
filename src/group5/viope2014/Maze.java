@@ -329,7 +329,8 @@ public class Maze {
                 }
             }
         }
-        this.printMaze();
+        //
+        // this.printMaze();
 
         for(int i=0;i<this.maze.length;i++)
         {
@@ -381,19 +382,20 @@ public class Maze {
         return pos;
     }
 
-    public void printMaze() {
+    /*public void printMaze() {
     	try {
     		System.out.printf("Score: %d\tLives: %d\tPowerTurns: %d\n", this.score, this.lives, this.powerPillTurns);
     		for (int i = 0; i < this.rows; i++) {
     			for (int j = 0; j < this.columns; j++) {
     				System.out.print(this.maze[i][j].toString());
     			}
-    			System.out.println();
+    			//System.out.println();
     		}
     	} catch (NullPointerException e) {
     		e.printStackTrace();
     	}
     }
+    */
 
     public void newMaze() {
     	String newConfiguration = null, userInput = null;

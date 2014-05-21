@@ -3,10 +3,6 @@ package group5.viope2014;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
-
 public class PacMan extends MobileElement
 {
     private int defX, defY;
@@ -80,7 +76,7 @@ public class PacMan extends MobileElement
             adr+="pacmanright.png";
             break;
 		}
-        System.out.println(adr);
+
         return new ImageView(new Image(adr));
     }
 }

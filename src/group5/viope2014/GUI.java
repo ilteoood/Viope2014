@@ -1,7 +1,6 @@
 package group5.viope2014;
 
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -9,8 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -72,11 +69,9 @@ public class GUI extends BorderPane {
 
         top.setStyle("-fx-background-color: black;");
         borderPane.setStyle("-fx-background-color: black;");
-        //borderPane.setPrefHeight(365);
-        //borderPane.setPrefWidth(600);
+
         buttons.setSpacing(15.0);
-        // map.setPadding(new Insets(0,0,0,0));
-        //  load.setPadding(new Insets(0,0,0,10));
+
         load.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 12));
         load.setTextFill(Color.BLACK);
         load.setText("Load map");
@@ -95,12 +90,10 @@ public class GUI extends BorderPane {
         String currentElement = null;
         for (int column = 0; column < width; column++) {
             for (int row = 0; row < height; row++) {
-                //System.out.printf("X: %d, Y: %d\n", column, row);
                 currentElement = maze.getMazeElement(row, column).toString();
                 switch (currentElement.charAt(0)) {
                     case 'X':
-                        //GridPane.setConstraints(PacMan.getPicture(), row, column);
-                        //gameField.getChildren().add(PacMan.getPicture());
+
                         gameField.add(PacMan.getPicture(), column, row);
                         break;
                     case 'r':
@@ -127,7 +120,6 @@ public class GUI extends BorderPane {
                         break;
                     case '_':
                         gameField.add(Empty.getPicture(), column, row);
-                        //gameField.add(new Rectangle(40.0, 40.0, Color.WHITE), column, row);
                         break;
                     default:
                         break;
@@ -179,11 +171,11 @@ public class GUI extends BorderPane {
         load.setVisible(true);
         map.setVisible(true);
         borderPane.getChildren().remove(gameField);
-        //borderPane.getChildren().remove(top);
+
         gameOver = new VBox();
         Label labelGO = new Label("GAME OVER");
         map.setText(maze.getFilename());
-        //derp.setPadding(new Insets(0, 20, 0, 20));
+
         labelGO.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 50));
         labelGO.setTextFill(Color.WHITE);
         borderPane.setCenter(gameOver); // Game over img - element here
