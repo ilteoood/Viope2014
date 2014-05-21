@@ -27,11 +27,12 @@ public class Main extends Application {
     private int dir=0;
     private Behaviour bev;
     private boolean endGame=false;
+	Timeline timeline;
     /// Used for GUI, please don't modify!
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-        field = new Maze("largefield.txt");
+        field = new Maze("filename.txt");
         field.reload();
         bev =field.getPMBev();
         controller = new GUI();
@@ -40,6 +41,8 @@ public class Main extends Application {
         //field.reload();
         controller.buildGrid();
         controller.readMaze();
+        Music.PlaySound();
+        loadMap();      //Load buttonlistener
         primaryStage.setTitle("Pacman-simulator by Ghostbusters");
         primaryStage.setMinWidth(9 * 39);
         Scene s=new Scene(controller, field.getColumns() * 39, field.getRows() * 40 + 18);
@@ -61,10 +64,10 @@ public class Main extends Application {
             }
         });
         primaryStage.setScene(s);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
-        gameLoop();         //loop 1
-        graphicsLoop();     // loop 2
+        startGame();
         //controller.gameOver();
             /*Scanner sc = new Scanner(System.in);
             char userInput = '0';
@@ -124,18 +127,21 @@ public class Main extends Application {
             }*/
 
     }
-    public void setEndGame() {
-        this.endGame = true;
+
+    public void setEndGame(boolean b) {
+        this.endGame = b;
     }
 
-    public void graphicsLoop(){
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), new EventHandler<ActionEvent>() {
+    public void graphicsLoop() {
+        timeline = new Timeline(new KeyFrame(Duration.millis(750), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 controller.cls();
                 controller.readMaze();
                 if (endGame) {
                     controller.gameOver();
+                    timeline.stop();
+
                 }
 
             }
@@ -155,20 +161,48 @@ public class Main extends Application {
                     field.move();
                 } catch (EndGameException e) {
                     System.out.println("Game Over"); // Replace with game over -screen
-                    setEndGame();
+                    setEndGame(true);
                     cancel();
                     return;
 
                 }
 
             }
-        }, 1000, 1000);
+        }, 750, 750);
 
     }
 
     public static void main(String[] args) {
-		Music.PlaySound();
+
         launch(args);
 
     }
+
+    public void startGame()
+    {
+        gameLoop();         //loop 1
+        graphicsLoop();     // loop 2
+    }
+   public void loadMap() {
+       controller.load.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               field = new Maze(controller.map.getText());
+               //field.setFilename(controller.map.getText());
+               field.reload();
+               //controller.borderPane.setPrefWidth(field.getColumns() * 39);
+               //controller.borderPane.setPrefHeight(field.getRows() * 40 + 14);
+               //controller.borderPane.setPrefHeight(field.getRows() * 40 + 14);
+               //controller.borderPane.setPrefWidth(900);
+               controller.regMaze(field);
+               controller.readMaze();
+               setEndGame(false);
+               bev =field.getPMBev();
+               startGame();
+               System.out.print("Pylly");
+           }
+       });
+       ;
+   }
+
 }

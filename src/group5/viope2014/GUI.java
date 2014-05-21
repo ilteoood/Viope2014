@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -17,7 +19,6 @@ import javafx.scene.text.FontWeight;
 import java.io.IOException;
 
 public class GUI extends BorderPane {
-
     // Global variables
     int width;
     int height;
@@ -28,7 +29,14 @@ public class GUI extends BorderPane {
     @FXML
     GridPane gameField;
     @FXML
-    HBox top, gameOver;
+    HBox top, buttons;
+    @FXML
+    VBox gameOver;
+    @FXML
+    Button load;
+    @FXML
+    TextField map;
+
 
     public void regMaze(Maze x) {
         this.maze = x;
@@ -49,19 +57,41 @@ public class GUI extends BorderPane {
     }
 
     public void initialize() {
-
+        //Creation
+        load = new Button();
+        map = new TextField();
         gameField = new GridPane();
+        buttons = new HBox();
         top = new HBox();
+
+        // Styling
+        buttons.getChildren().addAll(map, load);
+        buttons.setAlignment(Pos.CENTER);
+        load.setVisible(false);
+        map.setVisible(false);
+
         top.setStyle("-fx-background-color: black;");
-        top.setAlignment(Pos.CENTER_LEFT);
-        gameField.setAlignment(Pos.TOP_LEFT);
-        borderPane.setCenter(gameField);
-        borderPane.setTop(top);
         borderPane.setStyle("-fx-background-color: black;");
+        //borderPane.setPrefHeight(365);
+        //borderPane.setPrefWidth(600);
+        buttons.setSpacing(15.0);
+        // map.setPadding(new Insets(0,0,0,0));
+        //  load.setPadding(new Insets(0,0,0,10));
+        load.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 12));
+        load.setTextFill(Color.BLACK);
+        load.setText("Load map");
+
+
+        //Position
+        top.setAlignment(Pos.CENTER);
+        gameField.setAlignment(Pos.CENTER);
+        borderPane.setTop(top);
+
     }
 
     public void readMaze() {
 
+        borderPane.setCenter(gameField);
         String currentElement = null;
         for (int column = 0; column < width; column++) {
             for (int row = 0; row < height; row++) {
@@ -96,7 +126,7 @@ public class GUI extends BorderPane {
                         gameField.add(Wall.getPicture(), column, row);
                         break;
                     case '_':
-                        gameField.add(Empty.getPicture(),column,row);
+                        gameField.add(Empty.getPicture(), column, row);
                         //gameField.add(new Rectangle(40.0, 40.0, Color.WHITE), column, row);
                         break;
                     default:
@@ -146,18 +176,21 @@ public class GUI extends BorderPane {
     }
 
     public void gameOver() {
+        load.setVisible(true);
+        map.setVisible(true);
         borderPane.getChildren().remove(gameField);
         //borderPane.getChildren().remove(top);
-        gameOver = new HBox();
-        Label derp = new Label("GAME OVER");
+        gameOver = new VBox();
+        Label labelGO = new Label("GAME OVER");
+        map.setText(maze.getFilename());
         //derp.setPadding(new Insets(0, 20, 0, 20));
-        derp.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 50));
-        derp.setTextFill(Color.WHITE);
+        labelGO.setFont(Font.font("Courier New", FontWeight.EXTRA_BOLD, 50));
+        labelGO.setTextFill(Color.WHITE);
         borderPane.setCenter(gameOver); // Game over img - element here
-        gameOver.getChildren().add(derp);
+        gameOver.getChildren().addAll(labelGO, buttons);
         gameOver.setAlignment(Pos.CENTER);
 
-
     }
+
 
 }

@@ -15,10 +15,7 @@ public class Music extends JFrame implements Runnable {
             AudioStream audios = new AudioStream(in);
             AudioPlayer.player.start(audios);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-
-        }
-
+            JOptionPane.showMessageDialog(null, e);}
     }
 
     public static void playSoundDeath() {
@@ -33,6 +30,7 @@ public class Music extends JFrame implements Runnable {
         }
 
     }
+
     public static void playSoundEatGhost() {
         InputStream in;
         try {
@@ -76,7 +74,6 @@ public class Music extends JFrame implements Runnable {
             JOptionPane.showMessageDialog(null, e);
 
         }
-
     }
 
     public static void playSoundBackground() {
@@ -90,7 +87,6 @@ public class Music extends JFrame implements Runnable {
         }
 
     }
-
     public void run() {
 
     }}

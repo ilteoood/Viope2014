@@ -3,6 +3,10 @@ package group5.viope2014;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+
 public class PacMan extends MobileElement
 {
     private int defX, defY;
@@ -56,8 +60,10 @@ public class PacMan extends MobileElement
 
     public static ImageView getPicture()
     {
-    	String adr="./white/";
-    	switch (PacMan.bev.getDirection()){
+        //return new ImageView(new Image("./white/pacmanup.png"));
+        String adr="./white/";
+    	switch (PacMan.bev.getDirection())
+        {
 		case choseDirection.Move_Right:
 			adr=adr+"pacmanright.png";
 			break;
@@ -70,9 +76,11 @@ public class PacMan extends MobileElement
 		case choseDirection.Move_Left:
 			adr=adr+"pacmanleft.png";
 			break;
+        default:
+            adr+="pacmanright.png";
+            break;
 		}
-    	
-    	
+        System.out.println(adr);
         return new ImageView(new Image(adr));
     }
 }
