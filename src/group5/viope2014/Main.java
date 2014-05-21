@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sun.audio.AudioPlayer;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -118,6 +119,7 @@ public class Main extends Application {
                     field.move();
                 } catch (EndGameException e) {
                     System.out.println("Game Over");
+                    AudioPlayer.player.stop();
                 }
 
             }

@@ -221,16 +221,19 @@ public class Maze {
             for (int j = 0; j < this.maze[i].length; j++) {
                 mazE = this.maze[i][j];
                 if (mazE instanceof PacMan) {
+                    Music.playSoundBackground();
                     boolean gonext = true;
                     PacManBehaviour pacb = (PacManBehaviour) ((PacMan) mazE).getBehaviour();
                     this.maze[i][j] = new Empty(i, j);
                     ((PacMan) mazE).decreaseTurns();
                     nextPos = this.checkforPacman(i, j, pacb);
                     if (this.maze[nextPos[0]][nextPos[1]] instanceof Pill) {
+                        Music.playSoundPill();
                         this.score += Pill.getPoints();
                         ((PacMan) mazE).pillEat();
-                    } else if (this.maze[nextPos[0]][nextPos[1]] instanceof Dot)
-                        this.score += Dot.getPoints();
+                    } else if (this.maze[nextPos[0]][nextPos[1]] instanceof Dot){
+                        Music.playSoundDots();
+                        this.score += Dot.getPoints();}
                     else if (this.maze[nextPos[0]][nextPos[1]] instanceof Enemy) {
                         if (((PacMan) mazE).isVulnerable()) {
                             this.lives--;
@@ -242,6 +245,7 @@ public class Maze {
                             this.nextturn = true;
                             gonext = !gonext;
                         } else {
+                            Music.playSoundIntermission();
                             enem = (Enemy) this.maze[nextPos[0]][nextPos[1]];
                             enem.setDead();
                             enem.move(i, j);
