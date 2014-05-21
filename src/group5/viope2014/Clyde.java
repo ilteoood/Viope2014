@@ -4,7 +4,7 @@ public class Clyde extends Enemy
 {
     public Clyde(int x, int y)
     {
-        super(new ClydeBehaviour(x,y));
+        super(new ClydeBehaviour(x,y,new ChaseBehaviour()));
         super.move(x,y);
     }
     @Override

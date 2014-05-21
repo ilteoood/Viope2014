@@ -3,16 +3,22 @@ package group5.viope2014;
 public class ClydeBehaviour extends Behaviour
 {
     private int direction = choseDirection.Move_Down;
+    private ArtificialIntelligence pattern;
 
-    public ClydeBehaviour(int x,int y)
+    public ClydeBehaviour(int x,int y,ArtificialIntelligence pattern)
     {
         super(x,y);
+        this.pattern = pattern;
     }
 
     @Override
     public int[] move(int dir,int nowX,int nowY)
     {
-        int[] directionArray=choseDirection.getMovement(dir);
+        int[] directionArray;
+        if(!super.getNextInvalid())
+            directionArray=choseDirection.getMovement(this.pattern.intMove(nowX, nowY));
+        else
+            directionArray=choseDirection.getMovement(dir);
         super.setOldX(nowX);
         super.setOldY(nowY);
         return new int[]{directionArray[0]+nowX,directionArray[1]+nowY};

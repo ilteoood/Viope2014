@@ -4,7 +4,7 @@ public class Inky extends Enemy
 {
     public Inky (int x, int y)
     {
-        super(new InkyBehaviour(x,y));
+        super(new InkyBehaviour(x,y,new FrightenedBehaviour()));
         super.move(x,y);
     }
     @Override
