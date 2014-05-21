@@ -255,9 +255,13 @@ public class Maze {
                                 this.score += Pill.getPoints();
                                 ((PacMan) mazE).pillEat();
                                 this.powerPillTurns=PacMan.defVulnereableTurns;
+                                Music.playSoundPill();
                             }
                             else if(this.maze[nextPos[0]][nextPos[1]] instanceof Dot)
+                            {
+                                Music.playSoundDots();
                                 this.score+=Dot.getPoints();
+                            }
                             else if(this.maze[nextPos[0]][nextPos[1]] instanceof Enemy)
                             {
                                 if(((PacMan) mazE).isVulnerable())
@@ -269,6 +273,8 @@ public class Maze {
                                     this.maze[((PacMan) mazE).getDefX()][((PacMan) mazE).getDefY()]=mazE;
                                     gonext=!gonext;
                                 }
+                                else
+                                    Music.playSoundEatGhost();
                             }
                             if (gonext){
                                 Maze.pcX = nextPos[0];

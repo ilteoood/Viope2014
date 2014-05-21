@@ -8,5 +8,6 @@ public class EndGameException extends Exception
     public EndGameException(String s)
     {
         super(s);
+        Music.playSoundDeath();
     }
 }
